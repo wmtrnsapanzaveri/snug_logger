@@ -1,7 +1,8 @@
 name: snug_logger
 description: A starting point for Dart libraries or applications.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+homepage: https://github.com/wmtrnsapanzaveri/snug_logger
+repository: https://github.com/wmtrnsapanzaveri/snug_logger
 
 environment:
   sdk: ^3.2.5
