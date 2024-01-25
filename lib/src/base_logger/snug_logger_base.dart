@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import '../model/log_detail.dart';
-import '../model/log_type.dart';
+import 'package:snug_logger/src/model/log_detail.dart';
+import 'package:snug_logger/src/model/log_type.dart';
 
 String _getTimeInMs() {
   final DateTime d = DateTime.now();
@@ -33,9 +33,9 @@ snugLog(
 
   final insideLogContent =
       '$colorSetup [${logType.name.toUpperCase()}] | ${_getTimeInMs()}\n'
-      ' Content: ${logTypeValue?.contentColor}${content.toString().replaceAll("\n", "")}${logTypeValue?.color}\n'
+      ' ${logType.name.toUpperCase()} Content: ${logTypeValue?.contentColor}${content.toString().replaceAll("\n", "")}${logTypeValue?.color}\n'
 /*      '│  Runtime Type: ${message.runtimeType}\n'*/
-      '${stackTrace != null ? " Stack Trace: $stackTrace" : ""}';
+      '${stackTrace != null ? "\u001b[1;91m Stack Trace: $stackTrace" : ""}';
 
   final logTemplate = '${logTypeValue?.color}'
       '${logTypeValue?.emoji} Start of ${logType.name.toUpperCase()} ${logTypeValue?.emoji}$colorSetup'

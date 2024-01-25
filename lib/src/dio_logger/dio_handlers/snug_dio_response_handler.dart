@@ -117,7 +117,7 @@ class SnugDioErrorHandler {
       msg +=
           '\n Status: ${dioException.response?.statusCode}';
     }
-    msg += '\n Message: $responseMessage';
+    msg += '\n Message: ${responseMessage?.replaceAll("\n", "\n ")}';
 
     if (data != null) {
       final prettyData = encoder.convert(data);

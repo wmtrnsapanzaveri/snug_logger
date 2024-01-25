@@ -26,9 +26,7 @@ class SnugDioLogger extends Interceptor {
         dioException: err,
       );
       logPrint(httpErrorLog.generateTextMessage());
-    } catch (_) {
-      //pass
-    }
+    } catch (_) {}
   }
 
   @override
@@ -41,9 +39,7 @@ class SnugDioLogger extends Interceptor {
         responseMessage: responseMessage,
       );
       logPrint(httpLog.generateTextMessage());
-    } catch (_, st) {
-      //pass
-    }
+    } catch (_) {}
     super.onResponse(response, handler);
   }
 
@@ -53,9 +49,7 @@ class SnugDioLogger extends Interceptor {
       final httpLog = SnugDioRequestHandler(
           requestOptions: options, requestHeaders: true, requestData: true);
       logPrint(httpLog.generateTextMessage());
-    } catch (_) {
-      //pass
-    }
+    } catch (_) {}
     super.onRequest(options, handler);
   }
 }
