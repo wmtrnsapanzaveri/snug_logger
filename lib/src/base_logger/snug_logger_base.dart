@@ -24,7 +24,6 @@ snugLog(
     LogType.error:
         const LogDetail("🚨", '\u001b[31m', contentColor: "\u001b[31m"),
     // Red
-    LogType.reset: const LogDetail("🔧", '\u001b[0m'),
     // White
   };
 
@@ -43,7 +42,7 @@ snugLog(
       '┌${CommonUtils.getHorizontalLine()}'
       '${insideLogContent.trim().replaceAll("\n", "$colorSetup│ ")}$colorSetup'
       '└${CommonUtils.getHorizontalLine()}$colorSetup'
-      'End of ${logType.name.toUpperCase()} Log 👋🏻${logTypeColor[LogType.reset]?.color}'; // Reset color
+      'End of ${logType.name.toUpperCase()} Log 👋🏻${CommonUtils.resetColor}'; // Reset color
 
   if (kDebugMode || logType == LogType.production) {
     debugPrint(logTemplate);

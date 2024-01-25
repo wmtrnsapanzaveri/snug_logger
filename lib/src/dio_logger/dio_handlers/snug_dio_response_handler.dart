@@ -39,7 +39,7 @@ class SnugDioRequestHandler {
         msg += '\n Headers: $prettyHeaders';
       }
       msg = "${msg.replaceAll("\n", "$messageColors│")}"
-          "$messageColors└${CommonUtils.getHorizontalLine()}\u001b[0m";
+          "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     } catch (_) {
       // TODO: add handling can`t convert
     }
@@ -90,7 +90,7 @@ class SnugDioResponseHandler {
       }
 
       msg = "${msg.replaceAll("\n", "$messageColors│")}"
-          "$messageColors└${CommonUtils.getHorizontalLine()}\u001b[0m";
+          "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     } catch (_) {}
     return msg;
   }
@@ -129,7 +129,7 @@ class SnugDioErrorHandler {
       msg += '\n Headers: $prettyHeaders';
     }
     msg = "${msg.replaceAll("\n", "$messageColors│")}"
-        "$messageColors└${CommonUtils.getHorizontalLine()}\u001b[0m";
+        "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     return msg;
   }
 }

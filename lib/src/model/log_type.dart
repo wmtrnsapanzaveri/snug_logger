@@ -1,1 +1,1 @@
-enum LogType { info, debug, production, error, reset }
+enum LogType { info, debug, production, error }
