@@ -122,7 +122,7 @@ class SnugDioErrorHandler {
 
     if (data != null) {
       final prettyData = encoder.convert(data);
-      msg += '\n Data: $prettyData';
+      msg += '\n Data: ${prettyData.replaceAll("\n", "$messageColors│")}';
     }
     if (headers.isNotEmpty) {
       final prettyHeaders = encoder.convert(headers);
