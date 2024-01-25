@@ -126,7 +126,7 @@ class SnugDioErrorHandler {
     }
     if (headers.isNotEmpty) {
       final prettyHeaders = encoder.convert(headers);
-      msg += '$messageColors Headers: $prettyHeaders';
+      msg += ' Headers: $prettyHeaders';
     }
     msg = "$contentHead${msg.replaceAll("\n", "$messageColors│")}"
         "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
