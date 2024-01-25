@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-
 import 'dio_handlers/snug_dio_response_handler.dart';
 
 class SnugDioLogger extends Interceptor {
@@ -52,11 +50,9 @@ class SnugDioLogger extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     try {
-      // final message = '${options.uri}';
       final httpLog = SnugDioRequestHandler(
           requestOptions: options, requestHeaders: true, requestData: true);
-      // _talker.logTyped(httpLog);
-      print(httpLog.generateTextMessage());
+      logPrint(httpLog.generateTextMessage());
     } catch (_) {
       //pass
     }
