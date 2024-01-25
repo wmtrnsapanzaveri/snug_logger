@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 7.0.1-wip">
+  <meta name="description" content="snug_logger API docs, for the Dart programming language.">
+  <title>snug_logger - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://github.com/wmtrnsapanzaveri/snug_logger">snug_logger package</a></li>
+  </ol>
+  <div class="self-name">snug_logger</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="snug_logger-">snug_logger 🛋️</h1>
+<p>A cozy and efficient logging package for Flutter applications.</p>
+<h2 id="overview-">Overview 🌟</h2>
+<p>Welcome to the vibrant world of <code>snug_logger</code> – not your typical logger, but the spirited companion
+your Flutter app craves! Beyond just logging, it's a coding carnival, and <code>snug_logger</code> is your
+all-access pass. In the expansive realm of Flutter development, this lively sidekick injects
+excitement, turning each log message into a cheerful dance of information. Your coding journey
+transforms into a burst of energy, where <code>snug_logger</code> paints your code with a blend of
+professionalism and playfulness. So, kick back, revel in the coding fiesta, and let <code>snug_logger</code>
+make your development experience a lively celebration! 🎉💻</p>
+<h2 id="features-">Features ✨</h2>
+<p>The <code>snug_logger</code> package brings a delightful blend of features to enhance your logging and network
+request handling in Flutter development. Here's a breakdown of its key attributes:</p>
+<ol>
+<li>
+<p><strong>Colorful Logging:</strong></p>
+<ul>
+<li>Dynamic and colorful log messages for different log levels, making debugging a visual and
+enjoyable experience.</li>
+<li>Emoji-based log type indicators, adding a touch of playfulness to your logs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Log Types:</strong></p>
+<ul>
+<li>Supports various log types, including debug, info, production, and a error log type.</li>
+</ul>
+</li>
+<li>
+<p><strong>Network Request Handling:</strong></p>
+<ul>
+<li>A dedicated <code>SnugDioLogger()</code> for handling Dio network requests with detailed logging options.</li>
+<li>Granular control over logging request headers, response headers, response data, and more.</li>
+</ul>
+</li>
+<li>
+<p><strong>Structured Log Formatting:</strong></p>
+<ul>
+<li>Well-organized log templates with clear sections for easy readability.</li>
+<li>Consistent formatting across different log types for a professional and polished appearance.</li>
+</ul>
+</li>
+</ol>
+<p>In essence, <code>snug_logger</code> is not just a logging package; it's a toolkit designed to infuse color,
+structure, and joy into your development journey. From dynamic and fun logs to seamless network
+request handling, this package offers a cozy and feature-rich experience for Flutter developers.</p>
+<h2 id="installation-">Installation 🚀</h2>
+<p>Get snug in seconds! Add <code>snug_logger</code> to your <code>pubspec.yaml</code> file:</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  snug_logger: ^1.0.0
+</code></pre>
+<h2 id="then-run-">Then, run 🕺</h2>
+<pre class="language-dart"><code>flutter pub get
+</code></pre>
+<h1 id="usage-">Usage 🎭</h1>
+<h2 id="import-the-package">Import the package</h2>
+<pre class="language-dart"><code>import 'package:snug_logger/snug_logger.dart';
+</code></pre>
+<h2 id="log-messages">Log Messages</h2>
+<pre class="language-dart"><code>snugLog(
+  "This is a debug message",
+  LogType.debug,
+);
+
+snugLog(
+  "This is a debug message",
+  LogType.info,
+);
+
+snugLog(
+  "This is a debug message",
+  LogType.production,
+);
+
+snugLog(
+  "This is a debug message",
+  LogType.error,
+);
+</code></pre>
+<h2 id="elevate-your-dio-network-logs-with-snugdiologger--">Elevate Your Dio Network Logs with <code>SnugDioLogger()</code>! 🌐 🚀</h2>
+<h4 id="introducing-the-snugdiologger--your-go-to-companion-for-handling-dio-network-requests-with-style-and-precision-with-just-a-few-lines-of-code-elevate-your-network-request-logging-game-to-a-whole-new-level-of-coziness">Introducing the <code>SnugDioLogger</code> – your go-to companion for handling Dio network requests with style and precision. With just a few lines of code, elevate your network request logging game to a whole new level of coziness!</h4>
+<pre class="language-dart"><code>Dio _dio = Dio();
+_dio.interceptors.add(SnugDioLogger());
+  // customization
+ _dio.interceptors.add(
+   SnugDioLogger(
+    responseMessage: true,
+    responseData: true,
+    requestData: true,
+    requestHeader: true,
+    requestHeaders: true,
+    logPrint: (object) {
+      debugPrint(object.toString());
+    },
+  ),
+);
+</code></pre>
+<h1 id="-join-the-snug-squad">🚀 Join the Snug Squad!</h1>
+<h4 id="whether-youre-a-coding-ninja-a-bug-whisperer-or-just-someone-spreading-good-vibes-were-all-ears-dive-into-the-cozy-chaos-open-up-an-issue-or-drop-in-a-pull-request--lets-make-this-space-warmer-together-your-ideas-fixes-or-just-a-virtual-high-five-are-all-welcome-the-more-the-merrier-">Whether you're a coding ninja, a bug whisperer, or just someone spreading good vibes, we're all ears! Dive into the cozy chaos, open up an issue, or drop in a pull request – let's make this space warmer together. Your ideas, fixes, or just a virtual high-five are all welcome. The more, the merrier! ✨</h4>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="snug_logger">
+  <span class="name"><a href="snug_logger/snug_logger-library.html">snug_logger</a></span> 
+
+</dt>
+<dd>Support for doing something awesome.
+</dd>
+
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://github.com/wmtrnsapanzaveri/snug_logger">snug_logger package</a></li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">snug_logger</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="snug_logger/snug_logger-library.html">snug_logger</a></li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    snug_logger
+      1.0.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

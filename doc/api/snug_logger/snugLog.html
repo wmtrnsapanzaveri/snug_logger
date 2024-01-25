@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the snugLog function from the snug_logger library, for the Dart programming language.">
+  <title>snugLog function - snug_logger library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">snug_logger</a></li>
+    <li><a href="../snug_logger/snug_logger-library.html">snug_logger</a></li>
+    <li class="self-crumb">snugLog function</li>
+  </ol>
+  <div class="self-name">snugLog</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="snug_logger&#47;snug_logger-library-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-function">snugLog</span> function 
+ 
+</h1></div>
+
+    <section class="multi-line-signature">
+        
+
+<span class="returntype">dynamic</span>
+<span class="name ">snugLog</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="snugLog-param-content">[<span class="type-annotation">dynamic</span> <span class="parameter-name">content</span> = <span class="default-value">&quot;Debug Message&quot;</span>, </span></li>
+<li><span class="parameter" id="snugLog-param-logType"><span class="type-annotation">LogType</span> <span class="parameter-name">logType</span> = <span class="default-value">LogType.debug</span>, </span></li>
+<li><span class="parameter" id="snugLog-param-stackTrace"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">stackTrace</span>]</span></li>
+</ol>)
+
+        
+
+    </section>
+    
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">snugLog(
+    [dynamic content = &quot;Debug Message&quot;,
+    LogType logType = LogType.debug,
+    StackTrace? stackTrace]) {
+  final Map&lt;LogType, LogDetail&gt; logTypeColor = {
+    LogType.info: const LogDetail(&quot;📝&quot;, &quot;\u001b[34m&quot;),
+    &#47;&#47; Blue
+    LogType.production: const LogDetail(&quot;🔬&quot;, &#39;\u001b[32m&#39;),
+    &#47;&#47; Green &#47;&#47; Production Log will be display in the release mode
+    LogType.debug: const LogDetail(&#39;🔎&#39;, &#39;\u001b[36m&#39;),
+    &#47;&#47; cyan
+    LogType.error:
+        const LogDetail(&quot;🚨&quot;, &#39;\u001b[31m&#39;, contentColor: &quot;\u001b[31m&quot;),
+    &#47;&#47; Red
+    &#47;&#47; White
+  };
+
+  LogDetail? logTypeValue = logTypeColor[logType];
+
+  var colorSetup = &quot;\u001b[0m\n${logTypeValue?.color}&quot;;
+
+  final insideLogContent =
+      &#39;$colorSetup [${logType.name.toUpperCase()}] | ${_getTimeInMs()}\n&#39;
+      &#39; ${logType.name.toUpperCase()} Content: ${logTypeValue?.contentColor}${content.toString().replaceAll(&quot;\n&quot;, &quot;&quot;)}${logTypeValue?.color}\n&#39;
+&#47;*      &#39;│  Runtime Type: ${message.runtimeType}\n&#39;*&#47;
+      &#39;${stackTrace != null ? &quot;\u001b[1;91m Stack Trace: $stackTrace&quot; : &quot;&quot;}&#39;;
+
+  final logTemplate = &#39;${logTypeValue?.color}&#39;
+      &#39;${logTypeValue?.emoji} Start of ${logType.name.toUpperCase()} ${logTypeValue?.emoji}$colorSetup&#39;
+      &#39;┌${CommonUtils.getHorizontalLine()}&#39;
+      &#39;${insideLogContent.trim().replaceAll(&quot;\n&quot;, &quot;$colorSetup│ &quot;)}$colorSetup&#39;
+      &#39;└${CommonUtils.getHorizontalLine()}$colorSetup&#39;
+      &#39;End of ${logType.name.toUpperCase()} Log 👋🏻${CommonUtils.resetColor}&#39;; &#47;&#47; Reset color
+
+  if (kDebugMode || logType == LogType.production) {
+    debugPrint(logTemplate);
+  }
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">snug_logger</a></li>
+    <li><a href="../snug_logger/snug_logger-library.html">snug_logger</a></li>
+    <li class="self-crumb">snugLog function</li>
+</ol>
+
+
+    <h5>snug_logger library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    snug_logger
+      1.0.0
+  </span>
+
+  
+</footer>
+
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+
