@@ -117,7 +117,7 @@ class SnugDioErrorHandler {
     final headers = dioException.requestOptions.headers;
     var msg = '\u001b[31m';
 
-      msg += '┌[${dioException.type.toString()}]\n';
+    msg += '┌[${dioException.type.toString()}]\n';
     msg += '\n [Message]: ${responseMessage?.replaceAll("\n", "\n ")}';
 
     if (data != null) {
