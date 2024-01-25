@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:snug_logger/src/model/common_utlis.dart';
 import 'package:snug_logger/src/model/log_detail.dart';
 import 'package:snug_logger/src/model/log_type.dart';
 
@@ -39,9 +40,9 @@ snugLog(
 
   final logTemplate = '${logTypeValue?.color}'
       '${logTypeValue?.emoji} Start of ${logType.name.toUpperCase()} ${logTypeValue?.emoji}$colorSetup'
-      '┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────'
+      '┌${CommonUtils.getHorizontalLine()}'
       '${insideLogContent.trim().replaceAll("\n", "$colorSetup│ ")}$colorSetup'
-      '└──────────────────────────────────────────────────────────────────────────────────────────────────────────────$colorSetup'
+      '└${CommonUtils.getHorizontalLine()}$colorSetup'
       'End of ${logType.name.toUpperCase()} Log 👋🏻${logTypeColor[LogType.reset]?.color}'; // Reset color
 
   if (kDebugMode || logType == LogType.production) {

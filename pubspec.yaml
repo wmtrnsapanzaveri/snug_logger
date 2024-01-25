@@ -11,9 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # path: ^1.8.0
+  dio: ^5.4.0
+
 
 dev_dependencies:
-  dio: ^5.4.0
+
   lints: ^2.1.0
   test: ^1.24.0

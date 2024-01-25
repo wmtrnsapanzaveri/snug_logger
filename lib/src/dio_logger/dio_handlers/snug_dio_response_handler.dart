@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:snug_logger/src/model/common_utlis.dart';
 import 'package:snug_logger/src/model/network_titles.dart';
 
 const encoder = JsonEncoder.withIndent('  ');
@@ -22,7 +23,7 @@ class SnugDioRequestHandler {
 
   String generateTextMessage() {
     var msg = '\x1B[38;5;208m'
-        '┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────\n'
+        '┌${CommonUtils.getHorizontalLine()}\n'
         ' [$title] [${requestOptions.method}] ${requestOptions.uri}';
 
     final data = requestOptions.data;
@@ -38,7 +39,7 @@ class SnugDioRequestHandler {
         msg += '\n Headers: $prettyHeaders';
       }
       msg = "${msg.replaceAll("\n", "$messageColors│")}"
-          "$messageColors└──────────────────────────────────────────────────────────────────────────────────────────────────────────────\u001b[0m";
+          "$messageColors└${CommonUtils.getHorizontalLine()}\u001b[0m";
     } catch (_) {
       // TODO: add handling can`t convert
     }
@@ -65,7 +66,7 @@ class SnugDioResponseHandler {
 
   String generateTextMessage() {
     var msg = '\u001b[1;92;5m'
-        '┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────\n'
+        '┌${CommonUtils.getHorizontalLine()}\n'
         ' [$title] [${response.requestOptions.method}] ${response.realUri}\n';
 
     final fetchResponseMessage = response.statusMessage;
@@ -89,8 +90,8 @@ class SnugDioResponseHandler {
       }
 
       msg = "${msg.replaceAll("\n", "$messageColors│")}"
-          "$messageColors└──────────────────────────────────────────────────────────────────────────────────────────────────────────────\u001b[0m";
-    } catch (_, st) {}
+          "$messageColors└${CommonUtils.getHorizontalLine()}\u001b[0m";
+    } catch (_) {}
     return msg;
   }
 }
@@ -103,9 +104,10 @@ class SnugDioErrorHandler {
   String get title => NetworkTitles.httpError.title;
 
   var messageColors = "\u001b[0m\n\u001b[31m";
+
   String generateTextMessage() {
     var msg = '\u001b[31m'
-        '┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────\n'
+        '┌${CommonUtils.getHorizontalLine()}\n'
         ' [$title] [${dioException.requestOptions.method}] ${dioException.response?.realUri}';
 
     final responseMessage = dioException.message;
@@ -114,8 +116,7 @@ class SnugDioErrorHandler {
     final headers = dioException.requestOptions.headers;
 
     if (statusCode != null) {
-      msg +=
-          '\n Status: ${dioException.response?.statusCode}';
+      msg += '\n Status: ${dioException.response?.statusCode}';
     }
     msg += '\n Message: ${responseMessage?.replaceAll("\n", "\n ")}';
 
@@ -128,7 +129,7 @@ class SnugDioErrorHandler {
       msg += '\n Headers: $prettyHeaders';
     }
     msg = "${msg.replaceAll("\n", "$messageColors│")}"
-    "$messageColors└──────────────────────────────────────────────────────────────────────────────────────────────────────────────\u001b[0m";
+        "$messageColors└${CommonUtils.getHorizontalLine()}\u001b[0m";
     return msg;
   }
 }
