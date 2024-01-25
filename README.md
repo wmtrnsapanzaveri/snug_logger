@@ -84,7 +84,7 @@ snugLog(
 );
 ```
 
-## Pick `SnugDioLogger()` for Dio Network Logs. 🌐
+## Elevate Your Dio Network Logs with `SnugDioLogger()`! 🌐 🚀
 
 #### Introducing the `SnugDioLogger` – your go-to companion for handling Dio network requests with style and precision. With just a few lines of code, elevate your network request logging game to a whole new level of coziness!
 
