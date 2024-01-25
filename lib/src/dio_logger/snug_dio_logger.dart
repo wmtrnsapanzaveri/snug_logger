@@ -6,7 +6,7 @@ class SnugDioLogger extends Interceptor {
   final bool requestHeaders;
   final bool responseMessage;
   final bool requestData;
-  final bool requestHeader;
+  final bool responseHeaders;
 
   void Function(Object object) logPrint;
 
@@ -15,7 +15,7 @@ class SnugDioLogger extends Interceptor {
       this.requestHeaders = false,
       this.responseMessage = false,
       this.requestData = false,
-      this.requestHeader = false,
+      this.responseHeaders = false,
       this.logPrint = print});
 
   @override
@@ -35,7 +35,7 @@ class SnugDioLogger extends Interceptor {
       final httpLog = SnugDioResponseHandler(
         response: response,
         responseData: responseData,
-        responseHeaders: requestHeaders,
+        responseHeaders: responseHeaders,
         responseMessage: responseMessage,
       );
       logPrint(httpLog.generateTextMessage());
@@ -47,7 +47,9 @@ class SnugDioLogger extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     try {
       final httpLog = SnugDioRequestHandler(
-          requestOptions: options, requestHeaders: true, requestData: true);
+          requestOptions: options,
+          requestHeaders: requestHeaders,
+          requestData: requestData);
       logPrint(httpLog.generateTextMessage());
     } catch (_) {}
     super.onRequest(options, handler);

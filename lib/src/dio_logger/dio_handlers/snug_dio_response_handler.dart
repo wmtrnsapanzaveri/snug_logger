@@ -108,7 +108,8 @@ class SnugDioErrorHandler {
   String generateTextMessage() {
     var msg = '\u001b[31m'
         '┌${CommonUtils.getHorizontalLine()}\n'
-        ' [$title] [${dioException.requestOptions.method}] ${dioException.response?.realUri}';
+        ' [$title] [${dioException.requestOptions.method}] ${dioException.response?.realUri}'
+        '└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}';
 
     final responseMessage = dioException.message;
     final statusCode = dioException.response?.statusCode;
@@ -116,7 +117,8 @@ class SnugDioErrorHandler {
     final headers = dioException.requestOptions.headers;
 
     if (statusCode != null) {
-      msg += '\n Status: ${dioException.response?.statusCode}';
+      msg += 'Response Data┌${CommonUtils.getHorizontalLine()}\n'
+          'Status: ${dioException.response?.statusCode}';
     }
     msg += '\n Message: ${responseMessage?.replaceAll("\n", "\n ")}';
 
