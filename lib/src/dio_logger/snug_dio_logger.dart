@@ -2,20 +2,20 @@ import 'package:dio/dio.dart';
 import 'dio_handlers/snug_dio_response_handler.dart';
 
 class SnugDioLogger extends Interceptor {
-  final bool responseData;
   final bool requestHeaders;
-  final bool responseMessage;
   final bool requestData;
+  final bool responseMessage;
   final bool responseHeaders;
+  final bool responseData;
 
   void Function(Object object) logPrint;
 
   SnugDioLogger(
-      {this.responseData = false,
-      this.requestHeaders = false,
-      this.responseMessage = false,
+      {this.requestHeaders = false,
       this.requestData = false,
+      this.responseMessage = false,
       this.responseHeaders = false,
+      this.responseData = false,
       this.logPrint = print});
 
   @override
