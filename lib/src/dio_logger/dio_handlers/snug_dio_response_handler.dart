@@ -65,31 +65,30 @@ class SnugDioResponseHandler {
   var messageColors = "\u001b[0m\n\u001b[1;92;5m";
 
   String generateTextMessage() {
-    var msg = '\u001b[1;92;5m'
+    var contentHead = '\u001b[1;92;5m'
         '┌${CommonUtils.getHorizontalLine()}\n'
-        ' [$title] [${response.requestOptions.method}] ${response.realUri}\n';
+        ' [$title] [${response.requestOptions.method}]  [Status: ${response.statusCode} ${response.statusMessage}]\n'
+        ' ${response.realUri}';
+    contentHead =
+        "${contentHead.replaceAll("\n", "$messageColors│")}${CommonUtils.resetColor}";
 
-    final fetchResponseMessage = response.statusMessage;
     final data = response.data;
     final headers = response.headers.map;
 
-    msg += ' Status: ${response.statusCode}';
-
-    if (responseMessage && fetchResponseMessage != null) {
-      msg += '\n Message: $fetchResponseMessage';
-    }
-
+    var msg = '\u001b[1;92;5m';
     try {
       if (responseData && data != null) {
         final prettyData = encoder.convert(data);
-        msg += '\n Data: $prettyData';
+        msg +=
+            '┌[Body]$messageColors│ ${prettyData.replaceAll("\n", "$messageColors│")}';
       }
       if (responseHeaders && headers.isNotEmpty) {
         final prettyHeaders = encoder.convert(headers);
-        msg += '\n Headers: $prettyHeaders';
+        msg +=
+            '$messageColors┌[Response Header]$messageColors│ ${prettyHeaders.replaceAll("\n", "$messageColors│")}';
       }
 
-      msg = "${msg.replaceAll("\n", "$messageColors│")}"
+      msg = "$contentHead\n$msg"
           "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     } catch (_) {}
     return msg;
@@ -106,21 +105,20 @@ class SnugDioErrorHandler {
   var messageColors = "\u001b[0m\n\u001b[31m";
 
   String generateTextMessage() {
-    var msg = '\u001b[31m'
+    var contentHead = '\u001b[31m'
         '┌${CommonUtils.getHorizontalLine()}\n'
-        ' [$title] [${dioException.requestOptions.method}] ${dioException.response?.realUri}'
-        '└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}';
+        ' [$title] [${dioException.requestOptions.method}]  [Status: ${dioException.response?.statusCode} ${dioException.response?.statusMessage}]\n'
+        ' ${dioException.response?.realUri}';
+    contentHead =
+        "${contentHead.replaceAll("\n", "$messageColors│")}${CommonUtils.resetColor}";
 
     final responseMessage = dioException.message;
-    final statusCode = dioException.response?.statusCode;
     final data = dioException.response?.data;
     final headers = dioException.requestOptions.headers;
+    var msg = '\u001b[31m';
 
-    if (statusCode != null) {
-      msg += 'Response Data┌${CommonUtils.getHorizontalLine()}\n'
-          'Status: ${dioException.response?.statusCode}';
-    }
-    msg += '\n Message: ${responseMessage?.replaceAll("\n", "\n ")}';
+      msg += '┌[${dioException.type.toString()}]\n';
+    msg += '\n [Message]: ${responseMessage?.replaceAll("\n", "\n ")}';
 
     if (data != null) {
       final prettyData = encoder.convert(data);
@@ -130,7 +128,7 @@ class SnugDioErrorHandler {
       final prettyHeaders = encoder.convert(headers);
       msg += '\n Headers: $prettyHeaders';
     }
-    msg = "${msg.replaceAll("\n", "$messageColors│")}"
+    msg = "$contentHead${msg.replaceAll("\n", "$messageColors│")}"
         "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     return msg;
   }
