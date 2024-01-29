@@ -1,5 +1,5 @@
 import 'package:snug_logger/snug_logger.dart';
-import 'package:snug_logger/src/model/log_type.dart';
+import 'package:snug_logger/src/utlis/log_type.dart';
 
 void main() {
   snugLog("[DEBUG]: 🐞 This is a debug message", LogType.debug);

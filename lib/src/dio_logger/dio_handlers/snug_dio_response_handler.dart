@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:snug_logger/src/model/common_utlis.dart';
-import 'package:snug_logger/src/model/network_titles.dart';
+import 'package:snug_logger/src/utlis/common_utlis.dart';
+import 'package:snug_logger/src/utlis/network_titles.dart';
 
 const encoder = JsonEncoder.withIndent('  ');
 

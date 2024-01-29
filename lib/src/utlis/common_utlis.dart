@@ -5,3 +5,6 @@ class CommonUtils {
 
   static String resetColor = "\u001b[0m";
 }
+
+bool kDebugMode = !bool.fromEnvironment('dart.vm.product') &&
+    !bool.fromEnvironment('dart.vm.profile');

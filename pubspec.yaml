@@ -9,8 +9,6 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  flutter:
-    sdk: flutter
   dio: ^5.4.0
 
 
