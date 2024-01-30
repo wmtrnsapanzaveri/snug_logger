@@ -43,8 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () =>
-                  snugLog('Having fun with Demo Data! 🚀', LogType.info),
+              onPressed: () => snugLog('Having fun with Demo Data! 🚀', LogType.info),
               child: const Text('Demo Data Print'),
             ),
             const SizedBox(height: 16),
