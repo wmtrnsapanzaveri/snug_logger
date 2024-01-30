@@ -10,6 +10,7 @@ String _getTimeInMs() {
   return '${d.hour}:$minutesPadded:$secondsPadded ${d.millisecond}ms';
 }
 
+
 class LogHandler {
   LogHandler() : super();
 
