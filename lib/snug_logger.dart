@@ -1,4 +1,4 @@
-/// Support for doing something awesome.
+/// A cozy and efficient logging package for Flutter applications.
 ///
 /// More dartdocs go here.
 library snug_logger;

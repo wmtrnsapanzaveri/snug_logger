@@ -52,99 +52,97 @@
   <div id="dartdoc-main-content" class="main-content">
       
 <section class="desc markdown">
-  <h1 id="snug_logger-">snug_logger 🛋️</h1>
+  <h1 id="span-stylecolor00bfffsnug_loggerspan-"><span style="color:#00bfff;">snug_logger</span> 🛋️</h1>
 <p>A cozy and efficient logging package for Flutter applications.</p>
+<p><img src="assets/gif/snug-logger.gif" alt="Snug Logger Gif"></p>
 <h2 id="welcome-">Welcome 🚀</h2>
-<p>Your vibrant Flutter companion, making logging a joyful dance of information. Let it add playfulness to your code canvas. Relax, enjoy the coding fiesta, and let your development journey be a lively celebration! 🌟💻🎉</p>
-<h2 id="features-">Features ✨</h2>
-<p>The <code>snug_logger</code> package brings a delightful blend of features to enhance your logging and network
-request handling in Flutter development. Here's a breakdown of its key attributes:</p>
-<ol>
-<li>
-<p><strong>Colorful Logging:</strong></p>
+<p>Your vibrant Flutter companion, making logging a joyful dance of information. Let it add playfulness
+to your code canvas. Relax, enjoy the coding fiesta, and let your development journey be a lively
+celebration! 🌟💻🎉</p>
+<h2 id="features-overview">Features Overview:</h2>
+<h3 id="1-colorful-logging">1. Colorful Logging:</h3>
 <ul>
-<li>Dynamic and colorful log messages for different log levels, making debugging a visual and
-enjoyable experience.</li>
-<li>Emoji-based log type indicators, adding a touch of playfulness to your logs.</li>
+<li>Dynamic and colorful log messages for different levels, enhancing visual debugging.</li>
+<li>Emoji-based log level indicators add a playful touch to logs.</li>
 </ul>
-</li>
-<li>
-<p><strong>Dynamic Log Types:</strong></p>
+<h3 id="2-dynamic-log-levels">2. Dynamic Log Levels:</h3>
 <ul>
-<li>Supports various log types, including debug, info, production, and a error log type.</li>
+<li>Supports various log levels: debug, info, production, and error.</li>
 </ul>
-</li>
-<li>
-<p><strong>Network Request Handling:</strong></p>
+<h3 id="3-network-request-handling">3. Network Request Handling:</h3>
 <ul>
-<li>A dedicated <code>SnugDioLogger()</code> for handling Dio network requests with detailed logging options.</li>
+<li>Introduces <code>SnugDioLogger</code> for handling Dio network requests with detailed logging options.</li>
 <li>Granular control over logging request headers, response headers, response data, and more.</li>
 </ul>
-</li>
-<li>
-<p><strong>Structured Log Formatting:</strong></p>
+<h3 id="4-structured-log-formatting">4. Structured Log Formatting:</h3>
 <ul>
 <li>Well-organized log templates with clear sections for easy readability.</li>
-<li>Consistent formatting across different log types for a professional and polished appearance.</li>
+<li>Consistent formatting across different log levels for a professional appearance.</li>
 </ul>
-</li>
-</ol>
-<p>In essence, <code>snug_logger</code> is not just a logging package; it's a toolkit designed to infuse color,
-structure, and joy into your development journey. From dynamic and fun logs to seamless network
-request handling, this package offers a cozy and feature-rich experience for Flutter developers.</p>
-<h2 id="installation-">Installation 🚀</h2>
-<p>Get snug in seconds! Add <code>snug_logger</code> to your <code>pubspec.yaml</code> file:</p>
+<h2 id="installation">Installation:</h2>
+<p>Add the <code>snug_logger</code> package to your <code>pubspec.yaml</code> file:</p>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
-  snug_logger: ^1.0.0
+  snug_logger: ^1.0.4
 </code></pre>
-<h2 id="then-run-">Then, run 🕺</h2>
-<pre class="language-dart"><code>flutter pub get
+<p>Run:</p>
+<pre class="language-bash"><code class="language-bash">flutter pub get
 </code></pre>
-<h1 id="usage-">Usage 🎭</h1>
-<h2 id="import-the-package">Import the package</h2>
-<pre class="language-dart"><code>import 'package:snug_logger/snug_logger.dart';
+<h2 id="usage">Usage:</h2>
+<h3 id="import-the-package">Import the package:</h3>
+<pre class="language-dart"><code class="language-dart">import 'package:snug_logger/snug_logger.dart';
 </code></pre>
-<h2 id="log-messages">Log Messages</h2>
-<pre class="language-dart"><code>snugLog(
-  "This is a debug message",
-  LogType.debug,
-);
-
-snugLog(
-  "This is a debug message",
-  LogType.info,
-);
-
-snugLog(
-  "This is a debug message",
-  LogType.production,
-);
-
-snugLog(
-  "This is a debug message",
-  LogType.error,
+<h3 id="log-messages">Log Messages:</h3>
+<h4 id="debug-message-example">Debug Message Example:</h4>
+<pre class="language-dart"><code>snugLog
+("This is a debug message
+"
+,LogType.
+debug
+,
 );
 </code></pre>
-<h2 id="elevate-your-dio-network-logs-with-snugdiologger--">Elevate Your Dio Network Logs with <code>SnugDioLogger()</code>! 🌐 🚀</h2>
-<h4 id="introducing-the-snugdiologger--your-go-to-companion-for-handling-dio-network-requests-with-style-and-precision-with-just-a-few-lines-of-code-elevate-your-network-request-logging-game-to-a-whole-new-level-of-coziness">Introducing the <code>SnugDioLogger</code> – your go-to companion for handling Dio network requests with style and precision. With just a few lines of code, elevate your network request logging game to a whole new level of coziness!</h4>
+<h4 id="production-message-example">Production Message Example:</h4>
+<pre class="language-dart"><code>snugLog
+("This is a production message
+"
+,LogType.
+debug
+,
+);
+</code></pre>
+<h4 id="info-message-example">Info Message Example:</h4>
+<pre class="language-dart"><code>snugLog
+("This is an info message
+"
+,LogType.
+debug
+,
+);
+</code></pre>
+<h3 id="snugdiologger-for-dio-network-requests">SnugDioLogger for Dio Network Requests:</h3>
 <pre class="language-dart"><code>Dio _dio = Dio();
-_dio.interceptors.add(SnugDioLogger());
-  // customization
- _dio.interceptors.add(
-   SnugDioLogger(
+
+_dio.interceptors.add(
+  SnugDioLogger(
     responseMessage: true,
     responseData: true,
     requestData: true,
-    requestHeader: true,
-    requestHeaders: true,
+    responseHeaders: false,
+    requestHeaders: false,
     logPrint: (object) {
       debugPrint(object.toString());
     },
   ),
 );
 </code></pre>
-<h1 id="-join-the-snug-squad">🚀 Join the Snug Squad!</h1>
-<h4 id="whether-youre-a-coding-ninja-a-bug-whisperer-or-just-someone-spreading-good-vibes-were-all-ears-dive-into-the-cozy-chaos-open-up-an-issue-or-drop-in-a-pull-request--lets-make-this-space-warmer-together-your-ideas-fixes-or-just-a-virtual-high-five-are-all-welcome-the-more-the-merrier-">Whether you're a coding ninja, a bug whisperer, or just someone spreading good vibes, we're all ears! Dive into the cozy chaos, open up an issue, or drop in a pull request – let's make this space warmer together. Your ideas, fixes, or just a virtual high-five are all welcome. The more, the merrier! ✨</h4>
+<h2 id="join-the-snug-squad">Join the Snug Squad:</h2>
+<ul>
+<li><a href="https://github.com/wmtrnsapanzaveri/snug_logger/issues">Open an Issue</a></li>
+<li><a href="https://github.com/wmtrnsapanzaveri/snug_logger/pulls">Submit a Pull Request</a></li>
+</ul>
+<p>Feel free to contribute, discuss, or just spread good vibes! 🚀✨</p>
+<p>If you have specific questions or optimizations you'd like me to explore in the code, please let me
+know!</p>
 </section>
 
 
@@ -155,7 +153,7 @@ _dio.interceptors.add(SnugDioLogger());
   <span class="name"><a href="snug_logger/snug_logger-library.html">snug_logger</a></span> 
 
 </dt>
-<dd>Support for doing something awesome.
+<dd>A cozy and efficient logging package for Flutter applications.
 </dd>
 
         </dl>
@@ -192,7 +190,7 @@ _dio.interceptors.add(SnugDioLogger());
 <footer>
   <span class="no-break">
     snug_logger
-      1.0.3
+      1.0.4
   </span>
 
   

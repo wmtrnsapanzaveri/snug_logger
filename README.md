@@ -113,9 +113,10 @@ _dio.interceptors.add(
 
 ## Join the Snug Squad:
 
-- [Open an Issue](link_to_issue_tracker)
-- [Submit a Pull Request](link_to_pull_request_guidelines)
-- [Join our Discussion Forum](link_to_forum)
+- [Open an Issue](https://github.com/wmtrnsapanzaveri/snug_logger/issues)
+- [Submit a Pull Request](https://github.com/wmtrnsapanzaveri/snug_logger/pulls)
+
+[//]: # (- [Join our Discussion Forum]&#40;link_to_forum&#41;)
 
 Feel free to contribute, discuss, or just spread good vibes! 🚀✨
 
