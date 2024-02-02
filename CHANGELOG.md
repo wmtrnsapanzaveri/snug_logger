@@ -1,4 +1,4 @@
-## 🚀 Version 1.0.4
+## 🚀 Version 1.0.5
 
 - **Simplified Experience:** Enjoy a more user-friendly snug_logger for effortless coding.
 
