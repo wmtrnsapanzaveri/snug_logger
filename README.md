@@ -2,7 +2,7 @@
 
 A cozy and efficient logging package for Flutter applications.
 
-![Snug Logger Gif](assets/gif/snug-logger.gif)
+![Snug Logger Gif](https://github.com/wmtrnsapanzaveri/snug_logger/blob/sapan/assets/gif/snug-logger.gif)
 
 ## Welcome 🚀
 
