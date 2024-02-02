@@ -13,6 +13,7 @@ enum LogType {
   /// Production log message.
   ///
   /// Indicates messages meant for production use, providing insights into the system's operation.
+  /// Warning: This log will be displayed in the release mode.
   production,
 
   /// Error log message.
