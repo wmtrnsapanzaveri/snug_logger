@@ -35,7 +35,7 @@ typedef DebugPrintCallback = void Function(String? message, {int? wrapWidth});
 ///
 ///   * [DebugPrintCallback], for function parameters and usage details.
 ///   * [debugPrintThrottled], the default implementation.
-DebugPrintCallback debugPrintSnug = debugPrintThrottled;
+Function debugPrintSnug = debugPrintThrottled;
 
 /// Alternative implementation of [debugPrintSnug] that does not throttle.
 /// Used by tests.
@@ -54,13 +54,45 @@ void debugPrintSynchronously(String? message, {int? wrapWidth}) {
 /// messages on platforms that rate-limit their logging (for example, Android).
 ///
 /// If `wrapWidth` is not null, the message is wrapped using [debugWordWrap].
-void debugPrintThrottled(String? message, {int? wrapWidth}) {
+
+maxContentIndex(List<String> list) {
+  int maxIndex = 0;
+  for (int i = 1; i < list.length; i++) {
+    if (list[i].length > list[maxIndex].length) maxIndex = i;
+  }
+
+  if (list[maxIndex].length > 1000) {
+    return maxIndex;
+  }
+  return 0;
+}
+
+void debugPrintThrottled(String? message, color, resetColor, {int? wrapWidth}) {
+  int maxIndex = maxContentIndex(message?.split('\n') ?? <String>['null']);
+
   final List<String> messageLines = message?.split('\n') ?? <String>['null'];
   if (wrapWidth != null) {
     _debugPrintBuffer.addAll(messageLines
         .expand<String>((String line) => debugWordWrap(line, wrapWidth)));
   } else {
-    _debugPrintBuffer.addAll(messageLines);
+    if (maxIndex != 0) {
+      for (var i = 0; i < messageLines.length; i++) {
+        if (i == maxIndex) {
+          var messageLength = 1000;
+          for (var j = 0; j < messageLines[i].length; j += messageLength) {
+            if (j + 1000 > messageLines[i].length && j != 0) {
+              _debugPrintBuffer.add(
+                  "$color${messageLines[i].substring(j, messageLines[i].length)}$resetColor");
+            } else {
+              _debugPrintBuffer.add(
+                  "$color${messageLines[i].substring(j, j + 1000)}$resetColor");
+            }
+          }
+        } else if (i != maxIndex) {
+          _debugPrintBuffer.add(messageLines[i]);
+        }
+      }
+    }
   }
   if (!_debugPrintScheduled) {
     _debugPrintTask();
@@ -74,6 +106,7 @@ final Queue<String> _debugPrintBuffer = Queue<String>();
 final Stopwatch _debugPrintStopwatch = Stopwatch();
 Completer<void>? _debugPrintCompleter;
 bool _debugPrintScheduled = false;
+
 void _debugPrintTask() {
   _debugPrintScheduled = false;
   if (_debugPrintStopwatch.elapsed > _kDebugPrintPauseTime) {
@@ -153,11 +186,13 @@ Iterable<String> debugWordWrap(String message, int width,
         }
         lastWordStart = index;
         mode = _WordWrapParseMode.inWord;
+        break;
       case _WordWrapParseMode.inWord: // looking for a good break point
         while ((index < message.length) && (message[index] != ' ')) {
           index += 1;
         }
         mode = _WordWrapParseMode.atBreak;
+        break;
       case _WordWrapParseMode.atBreak: // at start of break point
         if ((index - startForLengthCalculations > width) ||
             (index == message.length)) {
