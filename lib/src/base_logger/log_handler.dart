@@ -48,7 +48,7 @@ class LogHandler {
         'End of ${logType.name.toUpperCase()} Log 👋🏻${CommonUtils.resetColor}'; // Reset color
 
     if (kDebugMode || logType == LogType.production) {
-      debugPrintSnug(logTemplate);
+      debugPrintSnug(logTemplate,logTypeValue?.contentColor,CommonUtils.resetColor);
     }
   }
 }

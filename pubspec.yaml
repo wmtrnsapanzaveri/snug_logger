@@ -1,11 +1,11 @@
 name: snug_logger
 description: Snug Logger - Cozy, Fun, Powerful! Elevate your coding with simplicity and a touch of fun. Logging made delightful.
-version: 1.0.5
+version: 1.0.6
 homepage: https://github.com/wmtrnsapanzaveri/snug_logger
 repository: https://github.com/wmtrnsapanzaveri/snug_logger
 
 environment:
-  sdk: ^3.2.3
+  sdk: ">=2.16.0 <4.0.0"
 
 # Add regular dependencies here.
 dependencies:
