@@ -92,6 +92,8 @@ void debugPrintThrottled(String? message, color, resetColor, {int? wrapWidth}) {
           _debugPrintBuffer.add(messageLines[i]);
         }
       }
+    } else {
+      _debugPrintBuffer.addAll(messageLines);
     }
   }
   if (!_debugPrintScheduled) {

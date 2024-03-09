@@ -1,4 +1,4 @@
-## 🚀 Version 1.0.6
+## 🚀 Version 1.0.7
 
 - **Support for Older Dart Versions:** snug_logger now parties with the older Dart versions, like a time-traveling code connoisseur! 🎉
 
@@ -12,7 +12,7 @@
 
 - **Readable Code:** We've hired code poets to make sure every line sings like a bird on a sunny day. Say goodbye to code that looks like a tangled ball of yarn. 🐦
 
-Upgrade to 1.0.6 for a coding experience so smooth and delightful, you'll wonder how you ever lived without it! 🚀✨
+Upgrade to 1.0.7 for a coding experience so smooth and delightful, you'll wonder how you ever lived without it! 🚀✨
 
 
 ## 🚀 Version 1.0.5

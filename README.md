@@ -1,12 +1,15 @@
 # <span style="color:#00bfff;">snug_logger</span> 🛋️
 
-A logging package for Flutter that's as comfy as your favorite hoodie and as efficient as a well-oiled machine.
+A logging package for Flutter that's as comfy as your favorite hoodie and as efficient as a
+well-oiled machine.
 
 ![Snug Logger Gif](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmpldThtZTNyMzM3MGU2dmg1eHA4NTBseG1rMHZrdmRoN2Fpc3ByMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/boJT0xmU97bUlb5HjU/giphy-downsized-large.gif)
 
 ## Welcome 🚀
 
-Say goodbye to boring logs and hello to vibrant, colorful messages! Snug Logger makes logging a joyful dance of information. Let it add a touch of fun to your code canvas and make your development journey a lively celebration! 🌟💻🎉
+Say goodbye to boring logs and hello to vibrant, colorful messages! Snug Logger makes logging a
+joyful dance of information. Let it add a touch of fun to your code canvas and make your development
+journey a lively celebration! 🌟💻🎉
 
 ## Features Overview:
 
@@ -35,7 +38,7 @@ Add the `snug_logger` package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  snug_logger: ^1.0.6
+  snug_logger: ^1.0.7
 ```
 
 Run:
@@ -60,38 +63,43 @@ import 'package:snug_logger/snug_logger.dart';
 snugLog("This is a debug message, but don't worry, I'm debugging it with a magnifying glass, not a clown nose! 🤡🔍", LogType.debug);
 ```
 
+#### Error Message Example:
+
+```
+    snugLog(
+        "Uh-oh, something went wrong! But don\'t worry, I'm on it! 🦸‍♂️🔧",
+        LogType.error,
+        stackTrace: StackTrace.current,
+    );
+```
+
 #### Production Message Example:
 
 ```
-snugLog("This is a production message, like a well-crafted joke, it's ready for the big stage! 🎭😄", LogType.debug);
+snugLog("This is a production message, like a well-crafted joke, it's ready for the big stage! 🎭😄", LogType.production);
 ```
 
 #### Info Message Example:
 
 ```
-snugLog("This is an info message, just like a good dad joke, it's informative and amusing! 👨‍👧‍👦🤣", LogType.debug);
+snugLog("This is an info message, just like a good dad joke, it's informative and amusing! 👨‍👧‍👦🤣", LogType.info);
 ```
-
+    
 ### SnugDioLogger for Dio Network Requests:
 
 ```dart
-
-Dio _dio = Dio();
-
-_dio.interceptors.add
-(
-SnugDioLogger(
-responseMessage: true,
-responseData: true,
-requestData: true,
-responseHeaders: false,
-requestHeaders: false,
-logPrint: (object) {
-debugPrint(object.toString());
-},
-)
-,
-);
+    _dio.interceptors.add(
+      SnugDioLogger(
+        responseMessage: true,
+        responseData: true,
+        requestData: true,
+        responseHeaders: false,
+        requestHeaders: false,
+        logPrint: (object) {
+          debugPrint(object.toString());
+        },
+      ),
+    );
 ```
 
 ## Join the Snug Squad:
