@@ -68,26 +68,24 @@ maxContentIndex(List<String> list) {
 }
 
 void debugPrintThrottled(String? message, color, resetColor, {int? wrapWidth}) {
-  int maxIndex = maxContentIndex(message!.split('\n'));
+  int maxIndex = maxContentIndex(message?.split('\n') ?? <String>['null']);
 
-  final List<String> messageLines = message.split('\n') ?? <String>['null'];
+  final List<String> messageLines = message?.split('\n') ?? <String>['null'];
   if (wrapWidth != null) {
     _debugPrintBuffer.addAll(messageLines
         .expand<String>((String line) => debugWordWrap(line, wrapWidth)));
   } else {
-    // Old code
-    // _debugPrintBuffer.addAll(messageLines);
-    // Updated
     if (maxIndex != 0) {
       for (var i = 0; i < messageLines.length; i++) {
         if (i == maxIndex) {
           var messageLength = 1000;
           for (var j = 0; j < messageLines[i].length; j += messageLength) {
             if (j + 1000 > messageLines[i].length && j != 0) {
-              _debugPrintBuffer
-                  .add("$color${messageLines[i].substring(j, messageLines[i].length)}$resetColor");
+              _debugPrintBuffer.add(
+                  "$color${messageLines[i].substring(j, messageLines[i].length)}$resetColor");
             } else {
-              _debugPrintBuffer.add("$color${messageLines[i].substring(j, j + 1000)}$resetColor");
+              _debugPrintBuffer.add(
+                  "$color${messageLines[i].substring(j, j + 1000)}$resetColor");
             }
           }
         } else if (i != maxIndex) {
