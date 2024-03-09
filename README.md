@@ -1,14 +1,12 @@
 # <span style="color:#00bfff;">snug_logger</span> 🛋️
 
-A cozy and efficient logging package for Flutter applications.
+A logging package for Flutter that's as comfy as your favorite hoodie and as efficient as a well-oiled machine.
 
-![Snug Logger Gif](https://github.com/wmtrnsapanzaveri/snug_logger/blob/sapan/assets/gif/snug-logger.gif)
+![Snug Logger Gif](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmpldThtZTNyMzM3MGU2dmg1eHA4NTBseG1rMHZrdmRoN2Fpc3ByMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/boJT0xmU97bUlb5HjU/giphy-downsized-large.gif)
 
 ## Welcome 🚀
 
-Your vibrant Flutter companion, making logging a joyful dance of information. Let it add playfulness
-to your code canvas. Relax, enjoy the coding fiesta, and let your development journey be a lively
-celebration! 🌟💻🎉
+Say goodbye to boring logs and hello to vibrant, colorful messages! Snug Logger makes logging a joyful dance of information. Let it add a touch of fun to your code canvas and make your development journey a lively celebration! 🌟💻🎉
 
 ## Features Overview:
 
@@ -37,7 +35,7 @@ Add the `snug_logger` package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  snug_logger: ^1.0.4
+  snug_logger: ^1.0.6
 ```
 
 Run:
@@ -59,55 +57,40 @@ import 'package:snug_logger/snug_logger.dart';
 #### Debug Message Example:
 
 ```
-snugLog
-("This is a debug message
-"
-,LogType.
-debug
-,
-);
+snugLog("This is a debug message, but don't worry, I'm debugging it with a magnifying glass, not a clown nose! 🤡🔍", LogType.debug);
 ```
 
 #### Production Message Example:
 
 ```
-snugLog
-("This is a production message
-"
-,LogType.
-debug
-,
-);
+snugLog("This is a production message, like a well-crafted joke, it's ready for the big stage! 🎭😄", LogType.debug);
 ```
 
 #### Info Message Example:
 
 ```
-snugLog
-("This is an info message
-"
-,LogType.
-debug
-,
-);
+snugLog("This is an info message, just like a good dad joke, it's informative and amusing! 👨‍👧‍👦🤣", LogType.debug);
 ```
 
 ### SnugDioLogger for Dio Network Requests:
 
-```
+```dart
+
 Dio _dio = Dio();
 
-_dio.interceptors.add(
-  SnugDioLogger(
-    responseMessage: true,
-    responseData: true,
-    requestData: true,
-    responseHeaders: false,
-    requestHeaders: false,
-    logPrint: (object) {
-      debugPrint(object.toString());
-    },
-  ),
+_dio.interceptors.add
+(
+SnugDioLogger(
+responseMessage: true,
+responseData: true,
+requestData: true,
+responseHeaders: false,
+requestHeaders: false,
+logPrint: (object) {
+debugPrint(object.toString());
+},
+)
+,
 );
 ```
 
@@ -116,9 +99,11 @@ _dio.interceptors.add(
 - [Open an Issue](https://github.com/wmtrnsapanzaveri/snug_logger/issues)
 - [Submit a Pull Request](https://github.com/wmtrnsapanzaveri/snug_logger/pulls)
 
-[//]: # (- [Join our Discussion Forum]&#40;link_to_forum&#41;)
-
 Feel free to contribute, discuss, or just spread good vibes! 🚀✨
 
 If you have specific questions or optimizations you'd like me to explore in the code, please let me
-know!
+know! We are all here to learn and grow together. 🌟
+
+---
+
+*Why don't programmers like nature? It has too many bugs! 🐜🌿* 😄
