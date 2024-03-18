@@ -22,7 +22,9 @@ class SnugDioRequestHandler {
   var messageColors = "\u001b[0m\n\x1B[38;5;208m";
 
   String generateTextMessage() {
-
+    print("Actual data:::::::::::::::::::::");
+    print(requestData);
+    print(requestHeaders);
     if(requestData || requestHeaders) {
       var msg = '\x1B[38;5;208m'
           '┌${CommonUtils.getHorizontalLine()}\n'
