@@ -22,28 +22,33 @@ class SnugDioRequestHandler {
   var messageColors = "\u001b[0m\n\x1B[38;5;208m";
 
   String generateTextMessage() {
-    var msg = '\x1B[38;5;208m'
-        '┌${CommonUtils.getHorizontalLine()}\n'
-        ' [$title] [${requestOptions.method}] ${requestOptions.uri}';
 
-    final data = requestOptions.data;
-    final headers = requestOptions.headers;
+    if(requestData || requestHeaders) {
+      var msg = '\x1B[38;5;208m'
+          '┌${CommonUtils.getHorizontalLine()}\n'
+          ' [$title] [${requestOptions.method}] ${requestOptions.uri}';
 
-    try {
-      if (requestData && data != null) {
-        final prettyData = encoder.convert(data);
-        msg += '\n Data: $prettyData';
+      final data = requestOptions.data;
+      final headers = requestOptions.headers;
+
+      try {
+        if (requestData && data != null) {
+          final prettyData = encoder.convert(data);
+          msg += '\n Data: $prettyData';
+        }
+        if (requestHeaders && headers.isNotEmpty) {
+          final prettyHeaders = encoder.convert(headers);
+          msg += '\n Headers: $prettyHeaders';
+        }
+        msg = "${msg.replaceAll("\n", "$messageColors│")}"
+            "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils
+            .resetColor}";
+      } catch (_) {
+        // TODO: add handling can`t convert
       }
-      if (requestHeaders && headers.isNotEmpty) {
-        final prettyHeaders = encoder.convert(headers);
-        msg += '\n Headers: $prettyHeaders';
-      }
-      msg = "${msg.replaceAll("\n", "$messageColors│")}"
-          "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
-    } catch (_) {
-      // TODO: add handling can`t convert
+      return msg;
     }
-    return msg;
+    return "";
   }
 }
 
