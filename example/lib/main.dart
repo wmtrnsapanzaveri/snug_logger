@@ -122,20 +122,21 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => snugLog('Enjoying a Demo Info message! 🌟',
+              onPressed: () => snugLog('Enjoying a Info message! 🌟',
                   logType: LogType.info),
-              child: const Text('Demo Info Print'),
+              child: const Text('Info message'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () =>
                   snugLog('Just having a good time with Debug! 🔍'),
-              child: const Text('Demo Debug message'),
+              child: const Text('Debug message'),
             ),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => snugLog('Heavy Debugging in Production! 🛠️ ',
                   logType: LogType.production),
-              child: const Text('Demo Debug message'),
+              child: const Text('Production message'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
@@ -153,10 +154,6 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Perform Dio Request With Error'),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _performErrorRequest,
-              child: const Text('Print custom logs'),
-            ),
           ],
         ),
       ),
