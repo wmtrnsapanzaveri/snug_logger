@@ -38,7 +38,7 @@ Add the `snug_logger` package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  snug_logger: ^1.0.7
+  snug_logger: ^1.0.8
 ```
 
 Run:
@@ -57,32 +57,35 @@ import 'package:snug_logger/snug_logger.dart';
 
 ### Log Messages:
 
+#### Info Message Example:
+
+```dart
+snugLog("This is an info message, just like a good dad joke, it's informative and amusing! 👨‍👧‍👦🤣", 
+        logType:LogType.info);
+```
+
 #### Debug Message Example:
 
-```
-snugLog("This is a debug message, but don't worry, I'm debugging it with a magnifying glass, not a clown nose! 🤡🔍", LogType.debug);
+```dart
+snugLog("This is a debug message, but don't worry, I'm debugging it with a magnifying glass, not a clown nose! 🤡🔍",
+         logType:LogType.debug);
 ```
 
 #### Error Message Example:
 
-```
+```dart
     snugLog(
         "Uh-oh, something went wrong! But don\'t worry, I'm on it! 🦸‍♂️🔧",
-        LogType.error,
-        stackTrace: StackTrace.current,
+        logType:LogType.error,
+        stackTrace: StackTrace.current
     );
 ```
 
 #### Production Message Example:
 
-```
-snugLog("This is a production message, like a well-crafted joke, it's ready for the big stage! 🎭😄", LogType.production);
-```
-
-#### Info Message Example:
-
-```
-snugLog("This is an info message, just like a good dad joke, it's informative and amusing! 👨‍👧‍👦🤣", LogType.info);
+```dart
+snugLog("This is a production message, like a well-crafted joke, it's ready for the big stage! 🎭😄", 
+        logType:LogType.production);
 ```
     
 ### SnugDioLogger for Dio Network Requests:

@@ -1,6 +1,6 @@
 name: snug_logger
 description: Snug Logger - Cozy, Fun, Powerful! Elevate your coding with simplicity and a touch of fun. Logging made delightful.
-version: 1.0.7
+version: 1.0.8
 homepage: https://github.com/wmtrnsapanzaveri/snug_logger
 repository: https://github.com/wmtrnsapanzaveri/snug_logger
 
@@ -9,6 +9,8 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  flutter:
+    sdk: flutter
   dio: ^5.4.0
 
 

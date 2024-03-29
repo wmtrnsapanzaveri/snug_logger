@@ -2,6 +2,7 @@ import 'package:snug_logger/src/utlis/debug_print.dart';
 import 'package:snug_logger/src/utlis/common_utlis.dart';
 import 'package:snug_logger/src/model/log_detail.dart';
 import 'package:snug_logger/src/utlis/log_type.dart';
+import 'package:flutter/foundation.dart';
 
 String _getTimeInMs() {
   final DateTime d = DateTime.now();
@@ -13,10 +14,19 @@ String _getTimeInMs() {
 class LogHandler {
   LogHandler() : super();
 
+  static StackFrame stackData(List<StackFrame> stacks) {
+    var logPoint = stacks.firstWhere(
+      (StackFrame line) {
+        return line.package != 'snug_logger';
+      },
+    );
+    return logPoint;
+  }
+
   static snugIt(
-      [dynamic content = "Debug Message",
+      {dynamic content = "Debug Message",
       LogType logType = LogType.debug,
-      StackTrace? stackTrace]) {
+      required StackTrace stackTrace}) {
     final Map<LogType, LogDetail> logTypeColor = {
       LogType.info: const LogDetail("📝", "\u001b[34m"),
       // Blue
@@ -34,11 +44,18 @@ class LogHandler {
 
     var colorSetup = "\u001b[0m\n${logTypeValue?.color}";
 
+    final List<StackFrame> stackFrames1 =
+        StackFrame.fromStackTrace(FlutterError.demangleStackTrace(stackTrace))
+            .skipWhile((StackFrame frame) => frame.packageScheme == 'dart')
+            .toList();
+
+    StackFrame stackFrames = stackData(stackFrames1);
+
     final insideLogContent =
-        '$colorSetup [${logType.name.toUpperCase()}] | ${_getTimeInMs()}\n'
+        '$colorSetup [${logType.name.toUpperCase()}] | ${_getTimeInMs()} | ${stackFrames.packageScheme}:${stackFrames.package}/${stackFrames.packagePath}:${stackFrames.line}:${stackFrames.column}\n'
         ' ${logType.name.toUpperCase()} Content: ${logTypeValue?.contentColor}${content.toString().replaceAll("\n", "")}${logTypeValue?.color}\n'
 /*      '│  Runtime Type: ${message.runtimeType}\n'*/
-        '${stackTrace != null ? "\u001b[1;91m Stack Trace: $stackTrace" : ""}';
+        '${logType == LogType.error ? "${CommonUtils.getHorizontalLine()}\nStack Trace: $stackTrace" : ""}';
 
     final logTemplate = '${logTypeValue?.color}'
         '${logTypeValue?.emoji} Start of ${logType.name.toUpperCase()} ${logTypeValue?.emoji}$colorSetup'

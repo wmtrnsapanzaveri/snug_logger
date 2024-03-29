@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../index.html">snug_logger</a></li>
-    <li><a href="../snug_logger/snug_logger-library.html">snug_logger</a></li>
+    <li><a href="../snug_logger/snug_logger-library.html">snug_logger.dart</a></li>
     <li class="self-crumb">snugLog function</li>
   </ol>
   <div class="self-name">snugLog</div>
@@ -64,9 +64,9 @@
         
 
 <span class="returntype">dynamic</span>
-<span class="name ">snugLog</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="snugLog-param-content">[<span class="type-annotation">dynamic</span> <span class="parameter-name">content</span> = <span class="default-value">&quot;Debug Message&quot;</span>, </span></li>
-<li><span class="parameter" id="snugLog-param-logType"><span class="type-annotation"><a href="../snug_logger/LogType.html">LogType</a></span> <span class="parameter-name">logType</span> = <span class="default-value">LogType.debug</span>, </span></li>
-<li><span class="parameter" id="snugLog-param-stackTrace"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">stackTrace</span>]</span></li>
+<span class="name ">snugLog</span>(<wbr><ol class="parameter-list"><li><span class="parameter" id="snugLog-param-content"><span class="type-annotation">dynamic</span> <span class="parameter-name">content</span>, </span></li>
+<li><span class="parameter" id="snugLog-param-stackTrace">{<span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">stackTrace</span>, </span></li>
+<li><span class="parameter" id="snugLog-param-logType"><span class="type-annotation"><a href="../snug_logger/LogType.html">LogType</a></span> <span class="parameter-name">logType</span> = <span class="default-value">LogType.debug</span>}</span></li>
 </ol>)
 
         
@@ -81,11 +81,12 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">snugLog(
-    [dynamic content = &quot;Debug Message&quot;,
-    LogType logType = LogType.debug,
-    StackTrace? stackTrace]) {
-  LogHandler.snugIt(content, logType, stackTrace);
+  <pre class="language-dart"><code class="language-dart">snugLog(dynamic content,
+    {StackTrace? stackTrace, LogType logType = LogType.debug}) {
+  LogHandler.snugIt(
+      content: content,
+      logType: logType,
+      stackTrace: stackTrace ?? StackTrace.current);
 }</code></pre>
 </section>
 
@@ -119,7 +120,7 @@
 <footer>
   <span class="no-break">
     snug_logger
-      1.0.4
+      1.0.8
   </span>
 
   

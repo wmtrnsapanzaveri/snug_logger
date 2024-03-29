@@ -1,3 +1,16 @@
+## 🚀 Version 1.0.8
+
+- **Named Arguments:** We've updated snug_logger to support named arguments, making your code more readable and easier to understand. 📖
+
+- **Updated Example:** Our examples are now even more comprehensive, helping you to get the most out of snug_logger. 🎓
+
+- **Filename/Path Support:** Each log now includes the filename/path, giving you more context and making debugging a breeze. 🌬️
+
+- **SnugDioLogger Updation:** We've made snugDioLogger even easier to use, so you can focus on what matters most - your code. 🎯
+
+Upgrade to 1.0.8 for an even smoother and more efficient coding experience! 🚀✨
+
+
 ## 🚀 Version 1.0.7
 
 - **Support for Older Dart Versions:** snug_logger now parties with the older Dart versions, like a time-traveling code connoisseur! 🎉

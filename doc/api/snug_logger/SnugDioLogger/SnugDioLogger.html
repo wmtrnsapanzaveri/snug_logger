@@ -29,7 +29,7 @@
   <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
   <ol class="breadcrumbs gt-separated dark hidden-xs">
     <li><a href="../../index.html">snug_logger</a></li>
-    <li><a href="../../snug_logger/snug_logger-library.html">snug_logger</a></li>
+    <li><a href="../../snug_logger/snug_logger-library.html">snug_logger.dart</a></li>
     <li><a href="../../snug_logger/SnugDioLogger-class.html">SnugDioLogger</a></li>
     <li class="self-crumb">SnugDioLogger constructor</li>
   </ol>
@@ -79,7 +79,13 @@
     
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">SnugDioLogger</code></pre>
+  <pre class="language-dart"><code class="language-dart">SnugDioLogger(
+    {this.requestHeaders = false,
+    this.requestData = false,
+    this.responseMessage = false,
+    this.responseHeaders = false,
+    this.responseData = false,
+    this.logPrint = print});</code></pre>
 </section>
 
 
@@ -113,7 +119,7 @@
 <footer>
   <span class="no-break">
     snug_logger
-      1.0.4
+      1.0.8
   </span>
 
   
