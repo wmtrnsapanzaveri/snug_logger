@@ -50,7 +50,9 @@ class SnugDioLogger extends Interceptor {
           requestOptions: options,
           requestHeaders: requestHeaders,
           requestData: requestData);
-      logPrint(httpLog.generateTextMessage());
+      if (httpLog.generateTextMessage() != null) {
+        logPrint(httpLog.generateTextMessage() ?? "");
+      }
     } catch (_) {}
     super.onRequest(options, handler);
   }

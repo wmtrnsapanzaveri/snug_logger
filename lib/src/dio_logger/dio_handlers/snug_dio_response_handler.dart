@@ -21,11 +21,8 @@ class SnugDioRequestHandler {
 
   var messageColors = "\u001b[0m\n\x1B[38;5;208m";
 
-  String generateTextMessage() {
-    print("Actual data:::::::::::::::::::::");
-    print(requestData);
-    print(requestHeaders);
-    if(requestData || requestHeaders) {
+  String? generateTextMessage() {
+    if (requestData || requestHeaders) {
       var msg = '\x1B[38;5;208m'
           '┌${CommonUtils.getHorizontalLine()}\n'
           ' [$title] [${requestOptions.method}] ${requestOptions.uri}';
@@ -43,14 +40,13 @@ class SnugDioRequestHandler {
           msg += '\n Headers: $prettyHeaders';
         }
         msg = "${msg.replaceAll("\n", "$messageColors│")}"
-            "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils
-            .resetColor}";
+            "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
       } catch (_) {
         // TODO: add handling can`t convert
       }
       return msg;
     }
-    return "";
+    return null;
   }
 }
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="generator" content="made with love by dartdoc 7.0.1-wip">
+  <meta name="generator" content="made with love by dartdoc 8.0.3">
   <meta name="description" content="snug_logger API docs, for the Dart programming language.">
   <title>snug_logger - Dart API docs</title>
 
@@ -53,12 +53,13 @@
       
 <section class="desc markdown">
   <h1 id="span-stylecolor00bfffsnug_loggerspan-"><span style="color:#00bfff;">snug_logger</span> 🛋️</h1>
-<p>A cozy and efficient logging package for Flutter applications.</p>
-<p><img src="assets/gif/snug-logger.gif" alt="Snug Logger Gif"></p>
+<p>A logging package for Flutter that's as comfy as your favorite hoodie and as efficient as a
+well-oiled machine.</p>
+<p><img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmpldThtZTNyMzM3MGU2dmg1eHA4NTBseG1rMHZrdmRoN2Fpc3ByMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/boJT0xmU97bUlb5HjU/giphy-downsized-large.gif" alt="Snug Logger Gif"></p>
 <h2 id="welcome-">Welcome 🚀</h2>
-<p>Your vibrant Flutter companion, making logging a joyful dance of information. Let it add playfulness
-to your code canvas. Relax, enjoy the coding fiesta, and let your development journey be a lively
-celebration! 🌟💻🎉</p>
+<p>Say goodbye to boring logs and hello to vibrant, colorful messages! Snug Logger makes logging a
+joyful dance of information. Let it add a touch of fun to your code canvas and make your development
+journey a lively celebration! 🌟💻🎉</p>
 <h2 id="features-overview">Features Overview:</h2>
 <h3 id="1-colorful-logging">1. Colorful Logging:</h3>
 <ul>
@@ -82,7 +83,7 @@ celebration! 🌟💻🎉</p>
 <h2 id="installation">Installation:</h2>
 <p>Add the <code>snug_logger</code> package to your <code>pubspec.yaml</code> file:</p>
 <pre class="language-yaml"><code class="language-yaml">dependencies:
-  snug_logger: ^1.0.4
+  snug_logger: ^1.0.7
 </code></pre>
 <p>Run:</p>
 <pre class="language-bash"><code class="language-bash">flutter pub get
@@ -93,47 +94,34 @@ celebration! 🌟💻🎉</p>
 </code></pre>
 <h3 id="log-messages">Log Messages:</h3>
 <h4 id="debug-message-example">Debug Message Example:</h4>
-<pre class="language-dart"><code>snugLog
-("This is a debug message
-"
-,LogType.
-debug
-,
-);
+<pre class="language-dart"><code>snugLog("This is a debug message, but don't worry, I'm debugging it with a magnifying glass, not a clown nose! 🤡🔍", LogType.debug);
+</code></pre>
+<h4 id="error-message-example">Error Message Example:</h4>
+<pre class="language-dart"><code>    snugLog(
+        "Uh-oh, something went wrong! But don\'t worry, I'm on it! 🦸‍♂️🔧",
+        LogType.error,
+        stackTrace: StackTrace.current,
+    );
 </code></pre>
 <h4 id="production-message-example">Production Message Example:</h4>
-<pre class="language-dart"><code>snugLog
-("This is a production message
-"
-,LogType.
-debug
-,
-);
+<pre class="language-dart"><code>snugLog("This is a production message, like a well-crafted joke, it's ready for the big stage! 🎭😄", LogType.production);
 </code></pre>
 <h4 id="info-message-example">Info Message Example:</h4>
-<pre class="language-dart"><code>snugLog
-("This is an info message
-"
-,LogType.
-debug
-,
-);
+<pre class="language-dart"><code>snugLog("This is an info message, just like a good dad joke, it's informative and amusing! 👨‍👧‍👦🤣", LogType.info);
 </code></pre>
 <h3 id="snugdiologger-for-dio-network-requests">SnugDioLogger for Dio Network Requests:</h3>
-<pre class="language-dart"><code>Dio _dio = Dio();
-
-_dio.interceptors.add(
-  SnugDioLogger(
-    responseMessage: true,
-    responseData: true,
-    requestData: true,
-    responseHeaders: false,
-    requestHeaders: false,
-    logPrint: (object) {
-      debugPrint(object.toString());
-    },
-  ),
-);
+<pre class="language-dart"><code class="language-dart">    _dio.interceptors.add(
+      SnugDioLogger(
+        responseMessage: true,
+        responseData: true,
+        requestData: true,
+        responseHeaders: false,
+        requestHeaders: false,
+        logPrint: (object) {
+          debugPrint(object.toString());
+        },
+      ),
+    );
 </code></pre>
 <h2 id="join-the-snug-squad">Join the Snug Squad:</h2>
 <ul>
@@ -142,7 +130,9 @@ _dio.interceptors.add(
 </ul>
 <p>Feel free to contribute, discuss, or just spread good vibes! 🚀✨</p>
 <p>If you have specific questions or optimizations you'd like me to explore in the code, please let me
-know!</p>
+know! We are all here to learn and grow together. 🌟</p>
+<hr>
+<p><em>Why don't programmers like nature? It has too many bugs! 🐜🌿</em> 😄</p>
 </section>
 
 
@@ -190,7 +180,7 @@ know!</p>
 <footer>
   <span class="no-break">
     snug_logger
-      1.0.4
+      1.0.8
   </span>
 
   
