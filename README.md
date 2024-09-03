@@ -4,7 +4,6 @@ A logging package for Flutter that's as comfy as your favorite hoodie and as eff
 well-oiled machine.
 
 <a href="https://app.commanddash.io/agent/github_wmtrnsapanzaveri_snug_logger"><img src="https://img.shields.io/badge/AI-Code%20Agent-EB9FDA"></a>
-
 ![Snug Logger Gif](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmpldThtZTNyMzM3MGU2dmg1eHA4NTBseG1rMHZrdmRoN2Fpc3ByMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/boJT0xmU97bUlb5HjU/giphy-downsized-large.gif)
 
 ## Welcome 🚀
