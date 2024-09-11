@@ -39,7 +39,7 @@ Getting started with Snug Logger is a breeze! Add it to your `pubspec.yaml` file
 
 ```yaml
 dependencies:
-  snug_logger: ^1.0.9
+  snug_logger: ^1.0.10
 ```
 
 Then, fetch the package:

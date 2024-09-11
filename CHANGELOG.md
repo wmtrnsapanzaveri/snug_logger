@@ -1,4 +1,4 @@
-## 🚀 Version 1.0.9
+## 🚀 Version 1.0.10
 
 - **Version Update:** snug_logger now supports the latest Flutter version, ensuring compatibility and access to the newest features. 🌟
 
