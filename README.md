@@ -1,6 +1,7 @@
 # <span style="color:#00bfff;">Snug Logger</span> 🛋️
 
-![Snug Logger Feature Graphic](https://github.com/wmtrnsapanzaveri/snug_logger/blob/main/assets/images/snug_logger_feature_graphic.png)
+![Snug_Logger (2)](https://github.com/user-attachments/assets/a9678707-4f25-4091-9b3f-4d76f8842149)
+
 
 <span> Spice up your logs with **Snug Logger**! 🎉🛋️ <br>
 <a href="https://app.commanddash.io/agent/github_wmtrnsapanzaveri_snug_logger" style="font-weight:bold; color:#00bfff;">Click here to try it out! 🚀✨</a>  
@@ -39,7 +40,7 @@ Getting started with Snug Logger is a breeze! Add it to your `pubspec.yaml` file
 
 ```yaml
 dependencies:
-  snug_logger: ^1.0.10
+  snug_logger: ^1.0.9
 ```
 
 Then, fetch the package:
