@@ -1,6 +1,6 @@
 # <span style="color:#00bfff;">Snug Logger</span> 🛋️
 
-![Snug Logger Feature Graphic](assets/images/snug_logger_feature_graphic.png)
+![Snug Logger Feature Graphic](https://github.com/wmtrnsapanzaveri/snug_logger/blob/main/assets/images/snug_logger_feature_graphic.png)
 
 <span> Spice up your logs with **Snug Logger**! 🎉🛋️ <br>
 <a href="https://app.commanddash.io/agent/github_wmtrnsapanzaveri_snug_logger" style="font-weight:bold; color:#00bfff;">Click here to try it out! 🚀✨</a>  
