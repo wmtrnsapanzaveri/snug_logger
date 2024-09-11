@@ -9,6 +9,7 @@ void main() {
   runApp(const MyApp());
 }
 
+// Main application widget
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Snug Logger Use Case Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Home page widget with state
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -40,28 +42,17 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
-    /// Add SnugDioLogger to Dio instance
+    // Add SnugDioLogger to Dio instance in debug mode
     if (kDebugMode) {
       _dio.interceptors.add(
         SnugDioLogger(
-          /// Use to fetch request data
-          requestData: false,
-
-          /// Use to fetch request headers
-          requestHeaders: false,
-
-          /// Use to fetch response message
-          responseMessage: false,
-
-          /// Use to fetch response data
-          responseData: true,
-
-          /// Use to fetch response headers
-          responseHeaders: false,
-
+          requestData: false, // Fetch request data
+          requestHeaders: false, // Fetch request headers
+          responseMessage: false, // Fetch response message
+          responseData: true, // Fetch response data
+          responseHeaders: false, // Fetch response headers
           logPrint: (object) {
-            /// use debugPrint to print logs so it won't be printed in release mode
-            /// or add the interceptors with KDebugMode condition as shown above.
+            // Use debugPrint to print logs so it won't be printed in release mode
             debugPrint(object.toString());
           },
         ),
@@ -69,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  // Method to handle division by zero error
   _handleError(int i, int divisor) {
     try {
       if (divisor == 0) {
@@ -81,9 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  // Method to perform a sample Dio GET request
   Future<void> _performSampleRequest() async {
     try {
-      // Sample Dio request
       final response =
           await _dio.get('https://jsonplaceholder.typicode.com/posts/1');
       snugLog('Dio Request Successful! Response: ${response.data} 🎉',
@@ -94,9 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  // Method to perform a Dio GET request with an intentional error
   Future<void> _performErrorRequest() async {
     try {
-      // Sample Dio request with intentional error
       final response =
           await _dio.get('https://jsonplaceholder.typicode.com/posts/invalid');
       snugLog('Dio Error Request Successful! Response: ${response.data} 🚨',
@@ -122,8 +114,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => snugLog('Enjoying a Info message! 🌟',
-                  logType: LogType.info),
+              onPressed: () =>
+                  snugLog('Enjoying a Info message! 🌟', logType: LogType.info),
               child: const Text('Info message'),
             ),
             const SizedBox(height: 16),

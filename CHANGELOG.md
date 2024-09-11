@@ -1,3 +1,14 @@
+## 🚀 Version 1.0.9
+
+- **Version Update:** snug_logger now supports the latest Flutter version, ensuring compatibility and access to the newest features. 🌟
+
+- **Improved Structure:** We've restructured the code for better organization and maintainability, making it easier to navigate and extend. 🛠️
+
+- **Introducing Snug-Bot:** Meet the snug_logger bot! Interact with the package directly through the new bot available at [Command Dash](https://app.commanddash.io/agent/github_wmtrnsapanzaveri_snug_logger). Get instant help and explore features with ease! 🤖
+
+Upgrade to 1.0.9 for enhanced Flutter compatibility, streamlined code, and direct interaction with **snug_logger** through our new bot! 🚀✨
+
+
 ## 🚀 Version 1.0.8
 
 - **Named Arguments:** We've updated snug_logger to support named arguments, making your code more readable and easier to understand. 📖
