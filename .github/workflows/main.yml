@@ -1,23 +1,43 @@
-name: Update Diagrams
+name: Repo Visualizer
 
 on:
   push:
-    paths:
-      - '**/*.md'  # Adjust the path to your Markdown files containing Mermaid diagrams
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  render-diagrams:
+  generate-diagram:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Render Mermaid diagrams
-        uses: nielsvaneck/render-md-mermaid@v2
+      - name: Generate repository diagram
+        uses: githubocto/repo-visualizer@0.7.1
+        with:
+          output_file: 'diagram.svg'
+          excluded_paths: 'node_modules,dist,.github,.idea,assets,doc,example,test'
+
+      - name: Check for diagram changes
+        id: check_changes
+        run: |
+          git fetch
+          if git diff --exit-code diagram.svg; then
+            echo "changes_detected=false" >> $GITHUB_ENV
+          else
+            echo "changes_detected=true" >> $GITHUB_ENV
+        continue-on-error: true
 
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: 'Update rendered Mermaid diagrams'
-          file_pattern: '*.svg'
+        if: env.changes_detected == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add diagram.svg
+          git commit -m 'Repo visualizer: updated diagram'
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
