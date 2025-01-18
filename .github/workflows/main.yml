@@ -1,16 +1,26 @@
-name: Create diagram
+name: Repo Visualizer
 on:
   push:
     branches:
       - main
+permissions:
+  contents: write
 jobs:
   generate-diagram:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Generate repository diagram
         uses: githubocto/repo-visualizer@0.7.1
         with:
           output_file: 'diagram.svg'
-          excluded_paths: 'node_modules,dist'
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add diagram.svg
+          git commit -m 'Repo visualizer: updated diagram'
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
