@@ -1,39 +1,23 @@
-name: Generate Architecture Diagram
+name: Update Diagrams
 
 on:
   push:
-    branches:
-      - main
-
-permissions:
-  contents: write
+    paths:
+      - '**/*.md'  # Adjust the path to your Markdown files containing Mermaid diagrams
 
 jobs:
-  generate-diagram:
+  render-diagrams:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install Swark
-        run: |
-          pip install swark
-
-      - name: Generate diagram
-        run: |
-          swark generate --repo-path . --output-file diagram.svg
+      - name: Render Mermaid diagrams
+        uses: nielsvaneck/render-md-mermaid@v2
 
       - name: Commit and push changes
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add diagram.svg
-          git commit -m 'Generated architecture diagram'
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'Update rendered Mermaid diagrams'
+          file_pattern: '*.svg'
