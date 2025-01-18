@@ -1,0 +1,17 @@
+name: Create diagram
+on:
+  push:
+    branches:
+      - main
+jobs:
+  generate-diagram:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Generate repository diagram
+        uses: githubocto/repo-visualizer@0.7.1
+        with:
+          output_file: 'diagram.svg'
+          excluded_paths: 'node_modules,dist'
+
