@@ -1,4 +1,4 @@
-name: Repo Visualizer
+name: Generate Architecture Diagram
 
 on:
   push:
@@ -15,29 +15,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Generate repository diagram
-        uses: githubocto/repo-visualizer@0.7.1
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          output_file: 'diagram.svg'
-          excluded_paths: 'node_modules,dist,.github,.idea,assets,doc,example,test'
+          python-version: '3.x'
 
-      - name: Check for diagram changes
-        id: check_changes
+      - name: Install Swark
         run: |
-          git fetch
-          if git diff --exit-code diagram.svg; then
-            echo "changes_detected=false" >> $GITHUB_ENV
-          else
-            echo "changes_detected=true" >> $GITHUB_ENV
-        continue-on-error: true
+          pip install swark
+
+      - name: Generate diagram
+        run: |
+          swark generate --repo-path . --output-file diagram.svg
 
       - name: Commit and push changes
-        if: env.changes_detected == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add diagram.svg
-          git commit -m 'Repo visualizer: updated diagram'
+          git commit -m 'Generated architecture diagram'
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
