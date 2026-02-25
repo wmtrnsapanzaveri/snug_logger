@@ -24,7 +24,7 @@ class LogHandler {
     return logPoint;
   }
 
-  static snugIt(
+  static void snugIt(
       {dynamic content = "Debug Message",
       LogType logType = LogType.debug,
       required StackTrace stackTrace}) {

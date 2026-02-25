@@ -55,7 +55,7 @@ void debugPrintSynchronously(String? message, {int? wrapWidth}) {
 ///
 /// If `wrapWidth` is not null, the message is wrapped using [debugWordWrap].
 
-maxContentIndex(List<String> list) {
+int maxContentIndex(List<String> list) {
   int maxIndex = 0;
   for (int i = 1; i < list.length; i++) {
     if (list[i].length > list[maxIndex].length) maxIndex = i;
@@ -182,7 +182,7 @@ Iterable<String> debugWordWrap(String message, int width,
   while (true) {
     switch (mode) {
       case _WordWrapParseMode
-            .inSpace: // at start of break point (or start of line); can't break until next break
+          .inSpace: // at start of break point (or start of line); can't break until next break
         while ((index < message.length) && (message[index] == ' ')) {
           index += 1;
         }

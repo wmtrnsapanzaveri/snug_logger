@@ -42,7 +42,8 @@ class CurlUtils {
         '│ [${NetworkTitles.httpRequestCurl.title}] '
         '${generateCurl(options)}';
 
-    curlMsg += "\n$colorCode└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
+    curlMsg +=
+        "\n$colorCode└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     return curlMsg;
   }
 }

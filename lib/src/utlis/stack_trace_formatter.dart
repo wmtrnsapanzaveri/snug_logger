@@ -189,7 +189,7 @@ class Trace {
     final frames = useTerse ? terse._frames : _frames;
 
     if (frames.isEmpty) {
-      return '${colorPrefix}│  (No stack trace available)${colorSuffix}';
+      return '$colorPrefix│  (No stack trace available)$colorSuffix';
     }
 
     final buffer = StringBuffer();
@@ -198,7 +198,7 @@ class Trace {
       final frameStr = frame.format(terse: useTerse);
 
       // Format with │ prefix to match Snug Logger style
-      buffer.write('${colorPrefix}│  ');
+      buffer.write('$colorPrefix│  ');
 
       // Add frame number indicator for better readability
       final frameNum = '#${i.toString().padLeft(2, '0')}';
@@ -208,7 +208,7 @@ class Trace {
       buffer.write(frameStr);
 
       // Add color reset and newline
-      buffer.write('${colorSuffix}\n');
+      buffer.write('$colorSuffix\n');
     }
 
     // Remove the last newline
