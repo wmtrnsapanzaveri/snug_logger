@@ -43,7 +43,7 @@ class SnugDioRequestHandler {
       }
     }
 
-    msg = "$contentHead${msg.isEmpty || msg == "\x1B[38;5;208m" ? "" : "\n$msg"}"
+    msg = "$contentHead${msg.isEmpty || msg == "\x1B[38;5;208m" ? "" : msg.replaceAll("\n", "$messageColors│")}"
         "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
 
     return msg;
