@@ -3,7 +3,11 @@ import 'package:snug_logger/src/utlis/common_utlis.dart';
 import 'package:snug_logger/src/utlis/network_titles.dart';
 
 class SnugDioRequestHandler {
-  SnugDioRequestHandler({required this.requestOptions, this.requestData = false, this.requestHeaders = false}) : super();
+  SnugDioRequestHandler(
+      {required this.requestOptions,
+      this.requestData = false,
+      this.requestHeaders = false})
+      : super();
 
   final RequestOptions requestOptions;
   final bool requestData;
@@ -19,7 +23,8 @@ class SnugDioRequestHandler {
     var contentHead = '\x1B[38;5;208m'
         '┌${CommonUtils.getHorizontalLine()}\n'
         ' [$title] [${requestOptions.method}] ${requestOptions.uri}';
-    contentHead = "${contentHead.replaceAll("\n", "$messageColors│")}${CommonUtils.resetColor}";
+    contentHead =
+        "${contentHead.replaceAll("\n", "$messageColors│")}${CommonUtils.resetColor}";
     // Normal Request Logging
     if (requestData || requestHeaders) {
       msg = '\x1B[38;5;208m';
@@ -43,7 +48,8 @@ class SnugDioRequestHandler {
       }
     }
 
-    msg = "$contentHead${msg.isEmpty || msg == "\x1B[38;5;208m" ? "" : msg.replaceAll("\n", "$messageColors│")}"
+    msg =
+        "$contentHead${msg.isEmpty || msg == "\x1B[38;5;208m" ? "" : msg.replaceAll("\n", "$messageColors│")}"
         "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
 
     return msg;

@@ -1,106 +1,50 @@
-# <span style="color:#00bfff;">Snug Logger</span> 🛋️
+# Snug Logger 🛋️
 
-![Snug_Logger (2)](https://github.com/user-attachments/assets/a9678707-4f25-4091-9b3f-4d76f8842149)
+![Snug_Logger](https://github.com/user-attachments/assets/a9678707-4f25-4091-9b3f-4d76f8842149?raw=true)
 
+A colorful, structured logger for Flutter apps.
 
-<span> Spice up your logs with **Snug Logger**! 🎉🛋️ <br>
-<a href="https://app.commanddash.io/agent/github_wmtrnsapanzaveri_snug_logger" style="font-weight:bold; color:#00bfff;">Click here to try it out! 🚀✨</a>  
-</span>
+Snug Logger helps you:
+- read logs faster with clean formatting and colors
+- log by intent (`debug`, `info`, `error`, `production`)
+- inspect Dio network traffic with optional cURL output
+- get readable stack traces for error debugging
 
-## Welcome to Snug Logger! 🚀
-
-Wave goodbye to mundane, dull logs and embrace the colorful, emoji-filled world of **Snug Logger**! 🎉💻✨ With us, debugging is no longer a chore but a lively, fun-filled experience.
-
-## Why Choose Snug Logger?
-
-- 🛋️ **Cozy to Use**: Vibrant and clear log messages that are as comforting as your favorite hoodie.
-- 🎨 **Color-Coded Clarity**: Instantly spot log levels with our dynamic colors and emojis.
-- 📊 **Professional Structure**: Playful yet organized, ensuring your logs are both engaging and easy to navigate.
-
-## Features:
-
-### 1. **Colorful Logging**:
-- Brighten up your log readability with dynamic colors for different log levels.
-- Emojis bring your logs to life: 🐞 for debug, ℹ️ for info, 🚨 for error, and more!
-
-### 2. **Versatile Log Levels**:
-- Log various levels: `debug`, `info`, `error`, and `production`. Each has its own role, keeping your logs purposeful and organized.
-
-### 3. **SnugDioLogger for Network Requests**:
-- Enhance your network request logs with **SnugDioLogger** for detailed insights into every request and response.
-- Tailor what you log—headers, request data, and response content—with fine-tuned control.
-
-### 4. **Structured Log Formatting**:
-- Logs follow a clear, structured template, blending fun with functionality.
-- Consistent formatting across all levels for a polished, professional look.
-
-## Installation:
-
-Getting started with Snug Logger is a breeze! Add it to your `pubspec.yaml` file:
+## Install
 
 ```yaml
 dependencies:
-  snug_logger: latest_version
+  snug_logger: ^1.0.11
 ```
-
-Then, fetch the package:
 
 ```bash
 flutter pub get
 ```
 
-## Quick Start:
-
-### Import the Package:
+## Quick Start
 
 ```dart
 import 'package:snug_logger/snug_logger.dart';
+
+snugLog('App started', logType: LogType.info);
+snugLog('Fetching user profile', logType: LogType.debug);
 ```
 
-### Basic Usage:
-
-Bring some flair to your logs with just a few lines of code!
-
-#### Example: Info Log
+### Error Logging with Stack Trace
 
 ```dart
-snugLog(
-  "This is an info message, filled with dad-joke-level wisdom and charm! 👨‍👧‍👦🤣", 
-  logType: LogType.info
-);
+try {
+  throw Exception('Something went wrong');
+} catch (error, stackTrace) {
+  snugLog(
+    error,
+    logType: LogType.error,
+    stackTrace: stackTrace,
+  );
+}
 ```
 
-#### Example: Debug Log
-
-```dart
-snugLog(
-  "Debugging with precision! No clowns involved, just pure detective work. 🤡🔍", 
-  logType: LogType.debug
-);
-```
-
-#### Example: Error Log
-
-```dart
-snugLog(
-  "Oops! Something went wrong, but don't worry, I've got the toolkit ready! 🦸‍♂️🔧", 
-  logType: LogType.error,
-  stackTrace: StackTrace.current
-);
-```
-
-#### Example: Production Log
-
-```dart
-snugLog(
-  "Production-ready logs: polished, professional, and prepared for the spotlight! 🎭😄", 
-  logType: LogType.production
-);
-```
-
-### Network Logging with SnugDioLogger:
-
-Integrate **SnugDioLogger** for detailed network request logs:
+## Network Logging (Dio)
 
 ```dart
 _dio.interceptors.add(
@@ -115,18 +59,37 @@ _dio.interceptors.add(
 );
 ```
 
-You control exactly what gets logged—headers, request data, or full responses. 🕵️‍♂️
+When `showCurl: true` is enabled, Snug Logger prints reproducible cURL commands so you can quickly share failing requests with backend teams.
 
-## Join the Snug Squad!
+## What You Can Configure
 
-Got ideas or feedback? We’re all ears! Here’s how to get involved:
+- `requestHeaders`: include request headers
+- `requestData`: include request body/query
+- `responseHeaders`: include response headers
+- `responseData`: include response body
+- `showCurl`: print cURL command for each request
+
+## Advanced Stack Trace Utilities
+
+If you want direct control over stack trace formatting:
+
+```dart
+final formatted = StackTraceFormatter.format(stackTrace);
+final terse = StackTraceFormatter.formatTerse(stackTrace);
+final snug = StackTraceFormatter.formatForSnugLogger(stackTrace);
+```
+
+## Contributing
 
 - 💬 [Open an Issue](https://github.com/wmtrnsapanzaveri/snug_logger/issues)
 - 📥 [Submit a Pull Request](https://github.com/wmtrnsapanzaveri/snug_logger/pulls)
 
-Let’s make logging a delightful part of coding! 🚀✨
+## Thanks to Contributors
 
----
+Thanks to everyone who contributed features, fixes, docs, and reviews, including the cURL printing enhancement.
 
-*Why did the programmer go broke? Because they used up all their cache! 💸😄*
+### Contributor Wall
 
+[![Contributors](https://contrib.rocks/image?repo=wmtrnsapanzaveri/snug_logger)](https://github.com/wmtrnsapanzaveri/snug_logger/graphs/contributors)
+
+- 👥 [View all contributors](https://github.com/wmtrnsapanzaveri/snug_logger/graphs/contributors)

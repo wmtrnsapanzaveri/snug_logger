@@ -17,7 +17,8 @@ class SnugDioErrorHandler {
         '┌${CommonUtils.getHorizontalLine()}\n'
         ' [$title] [${dioException.requestOptions.method}]  [Status: ${dioException.response?.statusCode} ${dioException.response?.statusMessage}]\n'
         ' ${dioException.response?.realUri}';
-    contentHead = "${contentHead.replaceAll("\n", "$messageColors│")}${CommonUtils.resetColor}";
+    contentHead =
+        "${contentHead.replaceAll("\n", "$messageColors│")}${CommonUtils.resetColor}";
 
     final responseMessage = dioException.message;
     final data = dioException.response?.data;

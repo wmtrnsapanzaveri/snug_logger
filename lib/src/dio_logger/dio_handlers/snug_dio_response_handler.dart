@@ -25,7 +25,8 @@ class SnugDioResponseHandler {
         '┌${CommonUtils.getHorizontalLine()}\n'
         ' [$title] [${response.requestOptions.method}]  [Status: ${response.statusCode} ${response.statusMessage}]\n'
         ' ${response.realUri}';
-    contentHead = "${contentHead.replaceAll("\n", "$messageColors│")}${CommonUtils.resetColor}";
+    contentHead =
+        "${contentHead.replaceAll("\n", "$messageColors│")}${CommonUtils.resetColor}";
 
     final data = response.data;
     final headers = response.headers.map;
@@ -34,13 +35,15 @@ class SnugDioResponseHandler {
 
     try {
       /// Get curl data
-      curlMsg = showCurl ? CurlUtils.getFormattedCurl(response.requestOptions) : "";
+      curlMsg =
+          showCurl ? CurlUtils.getFormattedCurl(response.requestOptions) : "";
 
       if (responseData || responseHeaders) {
         msg = '\u001b[1;92;5m';
         if (responseData && data != null) {
           final prettyData = CommonUtils.encoder.convert(data);
-          msg += '┌[Body]$messageColors│ ${prettyData.replaceAll("\n", "$messageColors│")}';
+          msg +=
+              '┌[Body]$messageColors│ ${prettyData.replaceAll("\n", "$messageColors│")}';
         }
         if (responseHeaders && headers.isNotEmpty) {
           final prettyHeaders = CommonUtils.encoder.convert(headers);
@@ -49,7 +52,8 @@ class SnugDioResponseHandler {
         }
       }
 
-      msg = "$contentHead${msg.isEmpty || msg == "\u001b[1;92;5m" ? "" : "\n$msg"}"
+      msg =
+          "$contentHead${msg.isEmpty || msg == "\u001b[1;92;5m" ? "" : "\n$msg"}"
           "$messageColors└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     } catch (_) {}
 

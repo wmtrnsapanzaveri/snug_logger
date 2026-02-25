@@ -23,7 +23,10 @@ class SnugDioLogger extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     try {
-      final httpLog = SnugDioRequestHandler(requestOptions: options, requestHeaders: requestHeaders, requestData: requestData);
+      final httpLog = SnugDioRequestHandler(
+          requestOptions: options,
+          requestHeaders: requestHeaders,
+          requestData: requestData);
       if (httpLog.generateTextMessage() != null) {
         logPrint(httpLog.generateTextMessage() ?? "");
       }
