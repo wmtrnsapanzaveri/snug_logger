@@ -34,13 +34,20 @@ Wave goodbye to mundane, dull logs and embrace the colorful, emoji-filled world 
 - Logs follow a clear, structured template, blending fun with functionality.
 - Consistent formatting across all levels for a polished, professional look.
 
+### 5. **Beautiful Stack Trace Formatting** 🎨:
+- **Snug Logger Style Formatting**: Stack traces automatically match your log output's cozy, structured aesthetic with box-drawing characters (│), frame numbers, and proper color coding! 🛋️
+- **Human-readable stack traces**: Formats stack traces in a clean, aligned format showing file paths, line numbers, and function names.
+- **Terse formatting**: Simplifies stack traces by removing internal Dart core library details, focusing on your code.
+- **Async stack chain support**: Track stack traces through asynchronous operations using Zones for complete error visibility.
+- **Zero dependencies**: Fully self-contained implementation with no external packages required - everything built from scratch! ✨
+
 ## Installation:
 
 Getting started with Snug Logger is a breeze! Add it to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  snug_logger: latest_version
+  snug_logger: ^1.0.11
 ```
 
 Then, fetch the package:
@@ -79,15 +86,27 @@ snugLog(
 );
 ```
 
-#### Example: Error Log
+#### Example: Error Log with Beautiful Stack Trace
 
 ```dart
-snugLog(
-  "Oops! Something went wrong, but don't worry, I've got the toolkit ready! 🦸‍♂️🔧", 
-  logType: LogType.error,
-  stackTrace: StackTrace.current
-);
+try {
+  // Your code that might throw an error
+  throw Exception('Something went wrong!');
+} catch (error, stackTrace) {
+  snugLog(
+    "Oops! Something went wrong, but don't worry, I've got the toolkit ready! 🦸‍♂️🔧", 
+    logType: LogType.error,
+    stackTrace: stackTrace
+  );
+}
 ```
+
+Error logs automatically include **beautifully formatted stack traces** in Snug Logger's signature style! 🎯 Stack traces are formatted with:
+- Box-drawing characters (│) matching the log structure
+- Frame numbers for easy reference
+- Proper color coding (red for errors)
+- Terse formatting that focuses on your code, not Dart internals
+- Clean, aligned formatting that blends seamlessly with your logs
 
 #### Example: Production Log
 
@@ -117,6 +136,73 @@ _dio.interceptors.add(
 
 You control exactly what gets logged—headers, request data, or full responses. 🕵️‍♂️
 
+### Advanced: Stack Trace Formatting
+
+Snug Logger provides powerful stack trace formatting utilities for advanced use cases. All features are **self-contained with zero external dependencies**! 🎉
+
+#### Format Stack Traces in Snug Logger Style
+
+```dart
+import 'package:snug_logger/snug_logger.dart';
+
+// Format in Snug Logger's cozy style (matches your log output!)
+final snugFormatted = StackTraceFormatter.formatForSnugLogger(
+  stackTrace,
+  useTerse: true,
+  colorPrefix: '\u001b[31m',  // Red color
+  colorSuffix: '\u001b[0m',    // Reset
+);
+
+// Human-readable format
+final formatted = StackTraceFormatter.format(stackTrace);
+
+// Terse format (removes Dart core library frames)
+final terse = StackTraceFormatter.formatTerse(stackTrace);
+
+// Format specifically for errors
+final errorTrace = StackTraceFormatter.formatForError(stackTrace, useTerse: true);
+```
+
+#### Capture Async Stack Chains
+
+Track stack traces through asynchronous operations:
+
+```dart
+StackTraceFormatter.capture(() {
+  Future.delayed(Duration(seconds: 1)).then((_) {
+    throw 'Error in async operation!';
+  });
+}, onError: (error, chain) {
+  print('Error: $error');
+  print('Stack Chain:\n${StackTraceFormatter.formatChainTerse(chain)}');
+});
+```
+
+#### Get Current Trace
+
+```dart
+final currentTrace = StackTraceFormatter.getCurrentTrace();
+print(currentTrace.toTerseString());
+```
+
+#### Convert StackTrace to Trace Object
+
+```dart
+final trace = StackTraceFormatter.fromStackTrace(stackTrace);
+print(trace.toString());              // Full format
+print(trace.toTerseString());         // Terse format
+print(trace.toSnugLoggerString());    // Snug Logger style format! 🛋️
+```
+
+#### Zero Dependencies! 🎉
+
+All stack trace functionality is **completely self-contained** - no external packages required! We've implemented everything from scratch to give you full control and keep your dependencies minimal. The implementation includes:
+- Custom stack trace parsing
+- Beautiful formatting with aligned columns
+- Terse formatting that removes clutter
+- Async stack chain support using Dart Zones
+- Snug Logger style formatting that matches your logs perfectly
+
 ## Join the Snug Squad!
 
 Got ideas or feedback? We’re all ears! Here’s how to get involved:
@@ -129,4 +215,3 @@ Let’s make logging a delightful part of coding! 🚀✨
 ---
 
 *Why did the programmer go broke? Because they used up all their cache! 💸😄*
-

@@ -5,7 +5,17 @@
 
 - **Improved Structure** Enhanced the SnugDioLogger request logging mechanism to gather and display information dynamically based on the configured flags, improving clarity and control. 🛠️.
 
-Upgrade to 1.0.11 for structured cURL logging, simplified response handling, and more flexible request log management in snug_logger. 🚀✨
+- **Beautiful Stack Trace Formatting! 🎨** Error logs now feature beautifully formatted stack traces that match Snug Logger's cozy, structured aesthetic! Stack traces are automatically formatted with proper indentation using box-drawing characters (│), frame numbers, and color coding. No external dependencies required - it's all built-in! ✨
+
+- **Custom Stack Trace Implementation:** We've implemented a complete, self-contained stack trace formatting system with zero external dependencies. Features include:
+  - Human-readable formatting with aligned columns
+  - Terse formatting that removes Dart core library clutter
+  - Async stack chain support for tracking errors through asynchronous operations
+  - Snug Logger style formatting that matches your log output perfectly 🛋️
+
+- **Enhanced Error Logging:** Error logs now automatically include beautifully formatted stack traces that blend seamlessly with the rest of your log output, maintaining the same visual style and structure. 🚨
+
+Upgrade to 1.0.11 for structured cURL logging, simplified response handling, flexible request log management, and beautifully formatted stack traces. 🚀✨
 
 ## 🚀 Version 1.0.10
 

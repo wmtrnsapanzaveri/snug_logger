@@ -2,6 +2,7 @@ import 'package:snug_logger/src/utlis/debug_print.dart';
 import 'package:snug_logger/src/utlis/common_utlis.dart';
 import 'package:snug_logger/src/model/log_detail.dart';
 import 'package:snug_logger/src/utlis/log_type.dart';
+import 'package:snug_logger/src/utlis/stack_trace_formatter.dart';
 import 'package:flutter/foundation.dart';
 
 String _getTimeInMs() {
@@ -51,11 +52,21 @@ class LogHandler {
 
     StackFrame stackFrames = stackData(stackFrames1);
 
+    // Format stack trace beautifully for error logs in Snug Logger style
+    final formattedStackTrace = logType == LogType.error
+        ? StackTraceFormatter.formatForSnugLogger(
+            stackTrace,
+            useTerse: true,
+            colorPrefix: logTypeValue?.contentColor ?? '',
+            colorSuffix: logTypeValue?.color ?? '',
+          )
+        : '';
+
     final insideLogContent =
         '$colorSetup [${logType.name.toUpperCase()}] | ${_getTimeInMs()} | ${stackFrames.packageScheme}:${stackFrames.package}/${stackFrames.packagePath}:${stackFrames.line}:${stackFrames.column}\n'
         ' ${logType.name.toUpperCase()} Content: ${logTypeValue?.contentColor}${content.toString().replaceAll("\n", "")}${logTypeValue?.color}\n'
 /*      '│  Runtime Type: ${message.runtimeType}\n'*/
-        '${logType == LogType.error ? "${CommonUtils.getHorizontalLine()}\nStack Trace: $stackTrace" : ""}';
+        '${logType == LogType.error ? "${CommonUtils.getHorizontalLine()}\n${logTypeValue?.color}│  Stack Trace: 🔍\n$formattedStackTrace" : ""}';
 
     final logTemplate = '${logTypeValue?.color}'
         '${logTypeValue?.emoji} Start of ${logType.name.toUpperCase()} ${logTypeValue?.emoji}$colorSetup'
