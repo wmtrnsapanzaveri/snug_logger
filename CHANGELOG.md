@@ -1,3 +1,12 @@
+## 🚀 Version 1.0.11
+- **cURL Support:** snug_logger now includes built-in cURL generation inside SnugDioLogger, making it easier to share API requests directly with backend teams for debugging and validation. 🔗.
+
+- **Logging Simplification:** Removed `responseMessage` and streamlined the logger output to follow a cleaner, more structured basic flow. 🧹.
+
+- **Improved Structure** Enhanced the SnugDioLogger request logging mechanism to gather and display information dynamically based on the configured flags, improving clarity and control. 🛠️.
+
+Upgrade to 1.0.11 for structured cURL logging, simplified response handling, and more flexible request log management in snug_logger. 🚀✨
+
 ## 🚀 Version 1.0.10
 
 - **Version Update:** snug_logger now supports the latest Flutter version, ensuring compatibility and access to the newest features. 🌟
