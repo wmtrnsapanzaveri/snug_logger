@@ -3,6 +3,7 @@ enum NetworkTitles {
   exception,
   httpError,
   httpRequest,
+  httpRequestCurl,
   httpResponse,
   blocEvent,
   blocTransition,
@@ -18,6 +19,8 @@ extension WellKnownTitlesExt on NetworkTitles {
         return 'ERROR';
       case NetworkTitles.exception:
         return 'EXCEPTION';
+      case NetworkTitles.httpRequestCurl:
+        return 'cURL';
       case NetworkTitles.httpError:
         return 'http-error';
       case NetworkTitles.httpRequest:
