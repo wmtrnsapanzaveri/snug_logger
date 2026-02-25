@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:snug_logger/snug_logger.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:snug_logger/snug_logger.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,11 +46,16 @@ class _MyHomePageState extends State<MyHomePage> {
     if (kDebugMode) {
       _dio.interceptors.add(
         SnugDioLogger(
-          requestData: false, // Fetch request data
-          requestHeaders: false, // Fetch request headers
-          responseMessage: false, // Fetch response message
-          responseData: true, // Fetch response data
-          responseHeaders: false, // Fetch response headers
+          requestData: false,
+          // Fetch request data
+          requestHeaders: false,
+          // Fetch request headers
+          responseData: true,
+          // Fetch response data
+          responseHeaders: false,
+          // Fetch response headers
+          showCurl: true,
+          // Gives you the request in curl format
           logPrint: (object) {
             // Use debugPrint to print logs so it won't be printed in release mode
             debugPrint(object.toString());
@@ -64,8 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   _handleError(int i, int divisor) {
     try {
       if (divisor == 0) {
-        throw Exception(
-            'Cannot divide by zero. Mathematical paradox detected! 🧮');
+        throw Exception('Cannot divide by zero. Mathematical paradox detected! 🧮');
       }
       return i / divisor;
     } catch (error, stackTrace) {
@@ -76,10 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // Method to perform a sample Dio GET request
   Future<void> _performSampleRequest() async {
     try {
-      final response =
-          await _dio.get('https://jsonplaceholder.typicode.com/posts/1');
-      snugLog('Dio Request Successful! Response: ${response.data} 🎉',
-          logType: LogType.info);
+      final response = await _dio.get('https://jsonplaceholder.typicode.com/posts/1');
+      snugLog('Dio Request Successful! Response: ${response.data} 🎉', logType: LogType.info);
       log("${response.data}");
     } catch (error, stackTrace) {
       snugLog('$error', logType: LogType.error, stackTrace: stackTrace);
@@ -89,10 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
   // Method to perform a Dio GET request with an intentional error
   Future<void> _performErrorRequest() async {
     try {
-      final response =
-          await _dio.get('https://jsonplaceholder.typicode.com/posts/invalid');
-      snugLog('Dio Error Request Successful! Response: ${response.data} 🚨',
-          logType: LogType.debug);
+      final response = await _dio.get('https://jsonplaceholder.typicode.com/posts/invalid');
+      snugLog('Dio Error Request Successful! Response: ${response.data} 🚨', logType: LogType.debug);
     } catch (error, stackTrace) {
       snugLog('$error', logType: LogType.error, stackTrace: stackTrace);
     }
@@ -114,20 +114,17 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () =>
-                  snugLog('Enjoying a Info message! 🌟', logType: LogType.info),
+              onPressed: () => snugLog('Enjoying a Info message! 🌟', logType: LogType.info),
               child: const Text('Info message'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () =>
-                  snugLog('Just having a good time with Debug! 🔍'),
+              onPressed: () => snugLog('Just having a good time with Debug! 🔍'),
               child: const Text('Debug message'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => snugLog('Heavy Debugging in Production! 🛠️ ',
-                  logType: LogType.production),
+              onPressed: () => snugLog('Heavy Debugging in Production! 🛠️ ', logType: LogType.production),
               child: const Text('Production message'),
             ),
             const SizedBox(height: 16),

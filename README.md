@@ -40,7 +40,7 @@ Getting started with Snug Logger is a breeze! Add it to your `pubspec.yaml` file
 
 ```yaml
 dependencies:
-  snug_logger: ^1.0.10
+  snug_logger: latest_version
 ```
 
 Then, fetch the package:
@@ -109,6 +109,7 @@ _dio.interceptors.add(
     requestData: true,
     responseHeaders: true,
     responseData: true,
+    showCurl: true,
     logPrint: (object) => debugPrint(object.toString()),
   ),
 );
