@@ -1,3 +1,6 @@
+## 🚀 Version 1.0.12
+- **cURL Updates:**  Update a cURL request for post data issue parsing in snug_logger.🔗.
+
 ## 🚀 Version 1.0.11
 - **cURL Support:** snug_logger now includes built-in cURL generation inside SnugDioLogger, making it easier to share API requests directly with backend teams for debugging and validation. 🔗.
 
