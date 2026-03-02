@@ -19,13 +19,13 @@ class CurlUtils {
 
     if (options.data != null) {
       if (options.data is FormData) {
-        components.add('-d "${options.data.toString()}"');
+        components.add('-d ${options.data.toString()}');
       } else {
         try {
           final data = json.encode(options.data);
-          components.add('-d "$data"');
+          components.add('-d $data');
         } catch (e) {
-          components.add('-d "${options.data}"');
+          components.add('-d ${options.data}');
         }
       }
     }
@@ -42,8 +42,7 @@ class CurlUtils {
         '│ [${NetworkTitles.httpRequestCurl.title}] '
         '${generateCurl(options)}';
 
-    curlMsg +=
-        "\n$colorCode└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
+    curlMsg += "\n$colorCode└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     return curlMsg;
   }
 }
