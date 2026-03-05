@@ -1,0 +1,52 @@
+name: Create Release Tag
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create-tag:
+    name: Create Version Tag
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.RELEASE_PAT }}
+
+      - name: Validate PAT secret
+        shell: bash
+        env:
+          RELEASE_PAT: ${{ secrets.RELEASE_PAT }}
+        run: |
+          if [ -z "$RELEASE_PAT" ]; then
+            echo "Missing RELEASE_PAT secret. Tag push via GITHUB_TOKEN will not trigger publish workflow."
+            echo "Add a classic PAT with repo scope as RELEASE_PAT in repository secrets."
+            exit 1
+          fi
+
+      - name: Create and push tag if missing
+        shell: bash
+        run: |
+          CURRENT_VERSION="$(grep '^version:' pubspec.yaml | awk '{print $2}')"
+          TAG_NAME="v$CURRENT_VERSION"
+
+          git fetch --tags
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Tag $TAG_NAME already exists. Skipping."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "$TAG_NAME"
+          git push origin "$TAG_NAME"
+          echo "Created and pushed tag: $TAG_NAME"

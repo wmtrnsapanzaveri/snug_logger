@@ -96,22 +96,37 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Validate tag matches pubspec version
+      - name: Validate tag and release status
         id: version_check
         shell: bash
         run: |
+          PACKAGE_NAME="$(grep '^name:' pubspec.yaml | awk '{print $2}')"
           CURRENT_VERSION="$(grep '^version:' pubspec.yaml | awk '{print $2}')"
           TAG_NAME="${GITHUB_REF#refs/tags/}"
           EXPECTED_TAG="v$CURRENT_VERSION"
+          PUB_API_URL="https://pub.dev/api/packages/$PACKAGE_NAME"
           echo "current_version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
           echo "tag_name=$TAG_NAME" >> "$GITHUB_OUTPUT"
           echo "expected_tag=$EXPECTED_TAG" >> "$GITHUB_OUTPUT"
+          echo "package_name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
           if [ "$TAG_NAME" = "$EXPECTED_TAG" ]; then
-            echo "publish=true" >> "$GITHUB_OUTPUT"
             echo "Tag matches version: $TAG_NAME"
           else
             echo "publish=false" >> "$GITHUB_OUTPUT"
             echo "Tag/version mismatch. Found tag '$TAG_NAME' but pubspec version is '$CURRENT_VERSION' (expected '$EXPECTED_TAG')."
+            exit 1
+          fi
+
+          if curl -fsS "$PUB_API_URL" -o pub_versions.json; then
+            if grep -q "\"version\":\"$CURRENT_VERSION\"" pub_versions.json; then
+              echo "Version $CURRENT_VERSION is already published on pub.dev. Skipping publish."
+              echo "publish=false" >> "$GITHUB_OUTPUT"
+            else
+              echo "Version $CURRENT_VERSION is not on pub.dev yet. Publish will proceed."
+              echo "publish=true" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "Could not query pub.dev API. Failing to avoid duplicate/unsafe publish."
             exit 1
           fi
 
