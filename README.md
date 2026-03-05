@@ -14,7 +14,7 @@ Snug Logger helps you:
 
 ```yaml
 dependencies:
-  snug_logger: ^1.0.12
+  snug_logger: ^1.0.14
 ```
 
 ```bash
