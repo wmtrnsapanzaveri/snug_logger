@@ -104,11 +104,17 @@ jobs:
           fi
 
       - name: Setup pub credentials (optional fallback)
-        if: steps.version_check.outputs.publish == 'true' && secrets.PUB_CREDENTIALS_JSON != ''
+        if: steps.version_check.outputs.publish == 'true'
         shell: bash
+        env:
+          PUB_CREDENTIALS_JSON: ${{ secrets.PUB_CREDENTIALS_JSON }}
         run: |
+          if [ -z "$PUB_CREDENTIALS_JSON" ]; then
+            echo "PUB_CREDENTIALS_JSON is not set; assuming trusted publishing is configured."
+            exit 0
+          fi
           mkdir -p "$HOME/.pub-cache"
-          printf '%s' '${{ secrets.PUB_CREDENTIALS_JSON }}' > "$HOME/.pub-cache/credentials.json"
+          printf '%s' "$PUB_CREDENTIALS_JSON" > "$HOME/.pub-cache/credentials.json"
 
       - name: Publish package
         if: steps.version_check.outputs.publish == 'true'
