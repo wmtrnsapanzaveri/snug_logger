@@ -1,0 +1,133 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  MIN_PANA_SCORE: "160"
+
+jobs:
+  quality-gates:
+    name: Quality Gates (Release)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Static analysis
+        run: flutter analyze
+
+      - name: Run tests (if present)
+        shell: bash
+        run: |
+          if [ ! -d test ] || ! find test -type f -name '*_test.dart' | grep -q .; then
+            echo "No *_test.dart files found. Skipping tests."
+            exit 0
+          fi
+
+          if ! rg -n "^\s*(test|group)\(" test --glob '*_test.dart' >/dev/null; then
+            echo "No executable test/group declarations found. Skipping tests."
+            exit 0
+          fi
+
+          flutter test
+
+      - name: Package publish dry run
+        run: dart pub publish --dry-run
+
+      - name: Install pana
+        run: dart pub global activate pana
+
+      - name: Run pana
+        shell: bash
+        run: |
+          export PATH="$PATH:$HOME/.pub-cache/bin"
+          pana --no-warning . | tee pana_output.txt
+
+      - name: Enforce full pana score
+        shell: bash
+        run: |
+          SCORE="$(sed -n 's/.*Points: \([0-9][0-9]*\)\/160.*/\1/p' pana_output.txt | tail -1)"
+          if [ -z "$SCORE" ]; then
+            echo "Could not determine pana score from output."
+            exit 1
+          fi
+          echo "pana score: $SCORE/160 (required: $MIN_PANA_SCORE/160)"
+          if [ "$SCORE" -lt "$MIN_PANA_SCORE" ]; then
+            echo "pana score is below required full score."
+            exit 1
+          fi
+
+  publish:
+    name: Publish To pub.dev
+    runs-on: ubuntu-latest
+    needs:
+      - quality-gates
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Validate tag matches pubspec version
+        id: version_check
+        shell: bash
+        run: |
+          CURRENT_VERSION="$(grep '^version:' pubspec.yaml | awk '{print $2}')"
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          EXPECTED_TAG="v$CURRENT_VERSION"
+          echo "current_version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag_name=$TAG_NAME" >> "$GITHUB_OUTPUT"
+          echo "expected_tag=$EXPECTED_TAG" >> "$GITHUB_OUTPUT"
+          if [ "$TAG_NAME" = "$EXPECTED_TAG" ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            echo "Tag matches version: $TAG_NAME"
+          else
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "Tag/version mismatch. Found tag '$TAG_NAME' but pubspec version is '$CURRENT_VERSION' (expected '$EXPECTED_TAG')."
+            exit 1
+          fi
+
+      - name: Setup pub credentials (optional fallback)
+        if: steps.version_check.outputs.publish == 'true'
+        shell: bash
+        env:
+          PUB_CREDENTIALS_JSON: ${{ secrets.PUB_CREDENTIALS_JSON }}
+        run: |
+          if [ -z "$PUB_CREDENTIALS_JSON" ]; then
+            echo "PUB_CREDENTIALS_JSON is not set; assuming trusted publishing is configured."
+            exit 0
+          fi
+          mkdir -p "$HOME/.pub-cache"
+          printf '%s' "$PUB_CREDENTIALS_JSON" > "$HOME/.pub-cache/credentials.json"
+
+      - name: Publish package
+        if: steps.version_check.outputs.publish == 'true'
+        run: dart pub publish --force
