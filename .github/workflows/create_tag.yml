@@ -20,6 +20,18 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.RELEASE_PAT }}
+
+      - name: Validate PAT secret
+        shell: bash
+        env:
+          RELEASE_PAT: ${{ secrets.RELEASE_PAT }}
+        run: |
+          if [ -z "$RELEASE_PAT" ]; then
+            echo "Missing RELEASE_PAT secret. Tag push via GITHUB_TOKEN will not trigger publish workflow."
+            echo "Add a classic PAT with repo scope as RELEASE_PAT in repository secrets."
+            exit 1
+          fi
 
       - name: Create and push tag if missing
         shell: bash
