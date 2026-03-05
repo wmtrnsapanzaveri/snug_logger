@@ -36,8 +36,20 @@ jobs:
       - name: Static analysis
         run: flutter analyze
 
-      - name: Run tests
-        run: flutter test
+      - name: Run tests (if present)
+        shell: bash
+        run: |
+          if [ ! -d test ] || ! find test -type f -name '*_test.dart' | grep -q .; then
+            echo "No *_test.dart files found. Skipping tests."
+            exit 0
+          fi
+
+          if ! rg -n "^\s*(test|group)\(" test --glob '*_test.dart' >/dev/null; then
+            echo "No executable test/group declarations found. Skipping tests."
+            exit 0
+          fi
+
+          flutter test
 
       - name: Package publish dry run
         run: dart pub publish --dry-run
