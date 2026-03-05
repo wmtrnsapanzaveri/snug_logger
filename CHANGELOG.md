@@ -1,3 +1,6 @@
+## 🚀 Version 1.0.14
+- **cURL Updates:**  Update a cURL request for form data to log request properly in SnugDioLogger 🛠️.
+
 ## 🚀 Version 1.0.12
 - **cURL Updates:**  Update a cURL request for post data issue parsing in snug_logger.🔗.
 

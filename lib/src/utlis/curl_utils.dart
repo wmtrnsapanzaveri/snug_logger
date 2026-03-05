@@ -19,7 +19,16 @@ class CurlUtils {
 
     if (options.data != null) {
       if (options.data is FormData) {
-        components.add('-d ${options.data.toString()}');
+        final formData = options.data as FormData;
+        final Map<String, dynamic> formMap = {};
+        for (final field in formData.fields) {
+          formMap[field.key] = field.value;
+        }
+        for (final file in formData.files) {
+          final filename = file.value.filename ?? file.key;
+          formMap[file.key] = '@$filename';
+        }
+        components.add('-d ${json.encode(formMap)}');
       } else {
         try {
           final data = json.encode(options.data);
@@ -42,7 +51,8 @@ class CurlUtils {
         '│ [${NetworkTitles.httpRequestCurl.title}] '
         '${generateCurl(options)}';
 
-    curlMsg += "\n$colorCode└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
+    curlMsg +=
+        "\n$colorCode└${CommonUtils.getHorizontalLine()}${CommonUtils.resetColor}";
     return curlMsg;
   }
 }
