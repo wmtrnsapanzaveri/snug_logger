@@ -20,21 +20,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.RELEASE_PAT }}
-
-      - name: Validate PAT secret
-        shell: bash
-        env:
-          RELEASE_PAT: ${{ secrets.RELEASE_PAT }}
-        run: |
-          if [ -z "$RELEASE_PAT" ]; then
-            echo "Missing RELEASE_PAT secret. Tag push via GITHUB_TOKEN will not trigger publish workflow."
-            echo "Add a classic PAT with repo scope as RELEASE_PAT in repository secrets."
-            exit 1
-          fi
 
       - name: Create and push tag if missing
         shell: bash
+        env:
+          RELEASE_PAT: ${{ secrets.RELEASE_PAT }}
         run: |
           CURRENT_VERSION="$(grep '^version:' pubspec.yaml | awk '{print $2}')"
           TAG_NAME="v$CURRENT_VERSION"
@@ -45,8 +35,15 @@ jobs:
             exit 0
           fi
 
+          if [ -z "$RELEASE_PAT" ]; then
+            echo "RELEASE_PAT is not set. Skipping tag push."
+            echo "Add RELEASE_PAT (classic PAT with repo scope) to trigger publish workflow from created tags."
+            exit 0
+          fi
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${RELEASE_PAT}@github.com/${GITHUB_REPOSITORY}.git"
           git tag "$TAG_NAME"
           git push origin "$TAG_NAME"
           echo "Created and pushed tag: $TAG_NAME"
